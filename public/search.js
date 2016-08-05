@@ -40,4 +40,9 @@ $(function() {
             $('#searchBar').val('');
         }
     });
+    $('#search').submit(function(e) {
+        e.preventDefault();
+        displayDogProfiles(mockDogProfiles);
+        $('#searchBar').val('');
+    });
 });
