@@ -22,6 +22,33 @@ var mockDogProfiles = {
         'shelter': 'SPCA'
     }]
 };
+var mockSavedBreeds = {
+    'dogBreeds': [
+        {
+            'breed': 'cattle dog'
+        },
+        {
+            'breed': 'black lab'
+        },
+        {
+            'breed': 'corgi'
+        },
+    ]
+};
+
+var mockSavedShelters = {
+    'dogShelters': [
+        {
+            'name': 'Resuce Pups'
+        },
+        {
+            'name': 'Pitt Pups'
+        },
+        {
+            'name': 'Rover Rescue'
+        },
+    ]
+};
 
 function displayDogProfiles(data) {
     for (i = 0; i < data.dogProfiles.length; i++) {
@@ -32,6 +59,7 @@ function displayDogProfiles(data) {
         }
     }
 }
+
 $(function() {
     $('#searchBar').keydown(function(e) {
         if (e.keyCode === 13) {
@@ -45,4 +73,24 @@ $(function() {
         displayDogProfiles(mockDogProfiles);
         $('#searchBar').val('');
     });
+});
+
+function displaySavedBreeds(data) {
+    for(i=0; i<data.dogBreeds.length; i++){
+        var breed = data.dogBreeds[i].breed;
+        $('#savedBreeds').append('<p>' + breed + '</p>');
+    }
+}
+
+function displaySavedShelters(data) {
+    for(i=0; i<data.dogShelters.length; i++){
+        var shelter = data.dogShelters[i].name;
+        $('#savedShelters').append('<p>' + shelter + '</p>');
+    }
+}
+
+$(function() {
+    displayDogProfiles(mockDogProfiles);
+    displaySavedBreeds(mockSavedBreeds);
+    displaySavedShelters(mockSavedShelters);
 });
