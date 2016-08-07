@@ -55,7 +55,7 @@ function displayDogProfiles(data) {
         var dogs = data.dogProfiles[i];
         var input = $('#searchBar').val();
         if (input == dogs.breed) {
-            $('#results').append('<p>' + dogs.name + ' ' + dogs.breed + ' ' + dogs.shelter + '</p>');
+            $('#results').append('<p>' + dogs.name + ' ' + dogs.breed + ' ' + dogs.shelter + '</p>' );
         }
     }
 }
@@ -76,8 +76,8 @@ $(function() {
 });
 
 function displaySavedBreeds(data) {
-    for(i=0; i<data.dogBreeds.length; i++){
-        var breed = data.dogBreeds[i].breed;
+    for(i=0; i<data.length; i++){
+        var breed = data[i].name;
         $('#savedBreeds').append('<p>' + breed + '</p>');
     }
 }
@@ -90,7 +90,15 @@ function displaySavedShelters(data) {
 }
 
 $(function() {
+    $.ajax({
+          url: 'http://localhost:8080/breeds',
+          type: 'get',
+          dataType: 'json',
+          jsonp: 'json',
+          success: function (data) {
+            displaySavedBreeds(data);
+          },
+    });
     displayDogProfiles(mockDogProfiles);
-    displaySavedBreeds(mockSavedBreeds);
     displaySavedShelters(mockSavedShelters);
 });
