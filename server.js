@@ -32,6 +32,13 @@ app.get('/shelters', function(req, res) {
         res.send(shelter);
     });
 });
+app.post('/shelters', function(req, res) {
+    if(req.body.pk){
+      Shelter.update({name: req.body.value} ,function(shelter){res.json(shelter);});
+    }else{
+      Shelter.create({name: req.body.name},function(shelter){res.json(shelter);});
+    }
+});
 app.get('/profiles', function(req, res) {
     Profile.find(function(err, profile){
         res.send(profile);

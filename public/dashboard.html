@@ -32,6 +32,8 @@
     <br>
     <br>
     <div id='accordion'>
+        <h3><i class="material-icons">pets</i>Saved Dog Profiles</h3>
+        <div id='savedProfiles'></div>
         <h3><i class="material-icons">pets</i>Saved Breeds</h3>
         <div id='savedBreeds'>
             <form id='breeds-form' action='/breeds' method='post'>
@@ -40,7 +42,12 @@
             </form>
         </div>
         <h3><i class="material-icons">pets</i>Saved Shelters</h3>
-        <div id='savedShelters'></div>
+        <div id='savedShelters'>
+            <form id='shelters-form' action='/shelters' method='post'>
+                <input type='text' id='save-shelters' placeholder='Save shelters...'>
+                <input type='submit' id='submit-shelters'>
+            </form>
+        </div>
     </div>
 </body>
 
