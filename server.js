@@ -8,7 +8,8 @@ var jsonParser = bodyParser.json();
 
 app.use(express.static('public'));
 app.use(bodyParser.json());
-mongoose.connect('mongodb://ryanlynn:rango123@ds145325.mlab.com:45325/heroku_t722w71v');
+// mongoose.connect('mongodb://ryanlynn:rango123@ds145325.mlab.com:45325/heroku_t722w71v');
+mongoose.connect('mongodb://localhost/shelter-dogs');
 
 var Breed = require('./models/breeds.js');
 var Shelter = require('./models/shelters.js');
@@ -16,31 +17,95 @@ var Profile = require('./models/profiles.js');
 var User = require('./models/users.js');
 
 app.get('/breeds', function(req, res) {
-    Breed.find(function(err, breed){
+    Breed.find(function(err, breed) {
+        if(err){
+            return res.status(500);
+        }
         res.send(breed);
     });
 });
 app.post('/breeds', function(req, res) {
-    if(req.body.pk){
-      Breed.update({name: req.body.value} ,function(breed){res.json(breed);});
-    }else{
-      Breed.create({name: req.body.name},function(breed){res.json(breed);});
+    if (req.body.pk) {
+        Breed.findOneAndUpdate({
+                _id: req.body.pk,
+            }, {
+                $set: {
+                    name: req.body.value
+                },
+            }, {
+                new: true
+            },
+            function(err, breed) {
+                if (err) {
+                    return res.status(500);
+                }
+                res.status(200).json(breed);
+            });
+    } else {
+        Breed.create({
+            name: req.body.name
+        }, function(err, breed) {
+            if (err) {
+                return res.status(500);
+            }
+            res.status(201).json(breed);
+        });
     }
 });
+app.delete('/breeds', function(req, res) {
+    Breed.remove({
+            _id: req.body.pk,
+        },
+        function(err, breed) {
+            if(err){
+                return res.status(500).json({
+                    message: 'Internal Server Error'
+                });
+            }
+            res.status(200).json(breed);
+        });
+});
 app.get('/shelters', function(req, res) {
-    Shelter.find(function(err, shelter){
+    Shelter.find(function(err, shelter) {
+        if(err){
+            return res.status(500);
+        }
         res.send(shelter);
     });
 });
 app.post('/shelters', function(req, res) {
-    if(req.body.pk){
-      Shelter.update({name: req.body.value} ,function(shelter){res.json(shelter);});
-    }else{
-      Shelter.create({name: req.body.name},function(shelter){res.json(shelter);});
+    if (req.body.pk) {
+        Shelter.findOneAndUpdate({
+                _id: req.body.pk,
+            }, {
+                $set: {
+                    name: req.body.value
+                },
+            }, {
+                new: true
+            },
+            function(err, shelter) {
+                if (err) {
+                    return res.status(500);
+                }
+                res.status(201).json(shelter);
+            });
+    } else {
+        Shelter.create({
+            name: req.body.name
+        }, function(err, shelter) {
+            if (err) {
+                return res.status(500);
+            }
+            res.status(201).json(shelter);
+        });
     }
 });
 app.get('/profiles', function(req, res) {
-    Profile.find(function(err, profile){
+    Profile.find(function(err, profile) {
+        if(err){
+            return res.status(500);
+        }
         res.send(profile);
     });
 });

@@ -33,8 +33,7 @@ $(function() {
         for (i = 0; i < data.length; i++) {
             var breed = data[i].name;
             var id = data[i]._id;
-            console.log(id);
-            $('#savedBreeds').append('<p>' + '<a href="#" class="savedBreeds" data-type="text" data-pk=' + id + ' data-url="/breeds">' + breed + '</a>' + '</p>');
+            $('#savedBreeds').append('<p class="breed">' + '<a href="#" class="savedBreeds" data-type="text" data-pk=' + id + ' data-url="/breeds">' + breed + '</a>' + '<img src="images/clear.png" id="delete" style="width: 25px">' + '</p>');
         }
         $('.savedBreeds').editable({
             ajaxOptions: {
@@ -46,11 +45,14 @@ $(function() {
             },
         });
     }
+    $('#savedBreeds').on('click', '#delete', function() {
+        $(this).closest('.breed').remove();
+    });
     $('#breeds-form').submit(function(e) {
         e.preventDefault();
         var input = $('#save-breeds').val();
         $.ajax({
-            url: 'https://mysterious-badlands-72714.herokuapp.com/breeds',
+            url: 'http://localhost:8080/breeds',
             type: 'post',
             data: JSON.stringify({
                 name: input
@@ -69,7 +71,7 @@ $(function() {
         for (i = 0; i < data.length; i++) {
             var id = data[i]._id;
             var shelter = data[i].name;
-            $('#savedShelters').append('<p>' + '<a href="#" class="savedShelters" data-type="text" data-pk=' + id + ' data-url="/breeds">' + shelter + '</a>' + '</p>');
+            $('#savedShelters').append('<p>' + '<a href="#" class="savedShelters" data-type="text" data-pk=' + id + ' data-url="/shelters">' + shelter + '</a>' + '<img src="images/clear.png" style="width: 25px">' + '</p>');
         }
         $('.savedShelters').editable({
             ajaxOptions: {
@@ -85,7 +87,7 @@ $(function() {
         e.preventDefault();
         var input = $('#save-shelters').val();
         $.ajax({
-            url: 'https://mysterious-badlands-72714.herokuapp.com/shelters',
+            url: 'http://localhost:8080/shelters',
             type: 'post',
             data: JSON.stringify({
                 name: input
@@ -96,9 +98,11 @@ $(function() {
                 console.log(data);
             },
         });
+        $('#savedShelters').append('<p>' + input + '</p>');
+        $('#save-shelters').val('');
     });
     $.ajax({
-        url: 'https://mysterious-badlands-72714.herokuapp.com/breeds',
+        url: 'http://localhost:8080/breeds',
         type: 'get',
         dataType: 'json',
         success: function(data) {
@@ -106,7 +110,7 @@ $(function() {
         },
     });
     $.ajax({
-        url: 'https://mysterious-badlands-72714.herokuapp.com/shelters',
+        url: 'http://localhost:8080/shelters',
         type: 'get',
         dataType: 'json',
         success: function(data) {
@@ -114,12 +118,11 @@ $(function() {
         },
     });
     $.ajax({
-        url: 'https://mysterious-badlands-72714.herokuapp.com/profiles',
+        url: 'http://localhost:8080/profiles',
         type: 'get',
         dataType: 'json',
         success: function(data) {
             displayDogProfiles(data);
-
         },
     });
 });
