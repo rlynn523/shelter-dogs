@@ -4,36 +4,12 @@ var mongoose = require('mongoose');
 var bodyParser = require('body-parser');
 var id = mongoose.Types.ObjectId();
 var jsonParser = bodyParser.json();
-var config = require('./config');
+
 
 app.use(express.static('public'));
 app.use(bodyParser.json());
+mongoose.connect('mongodb://ryanlynn:rango123@ds145325.mlab.com:45325/heroku_t722w71v');
 
-var runServer = function(callback) {
-    mongoose.connect(config.DATABASE_URL, function(err) {
-        if (err && callback) {
-            return callback(err);
-        }
-
-        app.listen(config.PORT, function() {
-            console.log('Listening on localhost:' + config.PORT);
-            if (callback) {
-                callback();
-            }
-        });
-    });
-};
-
-if (require.main === module) {
-    runServer(function(err) {
-        if (err) {
-            console.error(err);
-        }
-    });
-}
-
-exports.app = app;
-exports.runServer = runServer;
 var Breed = require('./models/breeds.js');
 var Shelter = require('./models/shelters.js');
 var Profile = require('./models/profiles.js');
