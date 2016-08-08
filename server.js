@@ -4,11 +4,11 @@ var mongoose = require('mongoose');
 var bodyParser = require('body-parser');
 var id = mongoose.Types.ObjectId();
 var jsonParser = bodyParser.json();
-
+var config = require('./config');
 
 app.use(express.static('public'));
 app.use(bodyParser.json());
-mongoose.connect('mongodb://localhost/shelter-dogs');
+mongoose.connect(config.DATABASE_URL);
 
 var Breed = require('./models/breeds.js');
 var Shelter = require('./models/shelters.js');
