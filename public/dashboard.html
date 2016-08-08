@@ -5,14 +5,20 @@
     <meta charset='UTF-8'>
     <meta name='viewport' content='width=device-width, initial-scale=1.0'>
     <meta http-equiv='X-UA-Compatible' content='ie=edge'>
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
-      rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <script src='https://code.jquery.com/jquery-1.12.4.js'></script>
     <script src='https://code.jquery.com/ui/1.12.0/jquery-ui.js'></script>
+    <link href='https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.0/jquery-ui.css' rel="stylesheet">
+    <link href="//cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.0/jqueryui-editable/css/jqueryui-editable.css" rel="stylesheet"/>
+<script src="//cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.0/jqueryui-editable/js/jqueryui-editable.min.js"></script>
     <script type='text/javascript' src='app.js'></script>
     <script>
         $(function() {
-            $('#accordion').accordion({collapsible: true, active: false});
+            $('#accordion').accordion({
+                collapsible: true,
+                active: false,
+                heightStyle: 'content'
+            });
         });
     </script>
     <title>Dashboard</title>
@@ -25,13 +31,16 @@
     </a>
     <br>
     <br>
-    <input type='text' id='save_breeds' placeholder='Save breeds...'>
+    <form id='breeds-form' action='/breeds' method='post'>
+        <input type='text' id='save-breeds' placeholder='Save breeds...'>
+        <input type='submit' id='submit-breeds'>
+    </form>
     <div id='accordion'>
-  <h3><i class="material-icons">pets</i>Saved Breeds</h3>
-  <div id='savedBreeds'></div>
-  <h3><i class="material-icons">pets</i>Saved Shelters</h3>
-  <div id='savedShelters'></div>
-</div>
+        <h3><i class="material-icons">pets</i>Saved Breeds</h3>
+        <div id='savedBreeds'></div>
+        <h3><i class="material-icons">pets</i>Saved Shelters</h3>
+        <div id='savedShelters'></div>
+    </div>
 </body>
 
 </html>
