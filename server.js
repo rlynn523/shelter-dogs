@@ -2,6 +2,9 @@ var express = require('express');
 var app = express();
 var mongoose = require('mongoose');
 var bodyParser = require('body-parser');
+var id = mongoose.Types.ObjectId();
+var jsonParser = bodyParser.json();
+
 
 app.use(express.static('public'));
 app.use(bodyParser.json());
@@ -10,6 +13,7 @@ mongoose.connect('mongodb://localhost/shelter-dogs');
 var Breed = require('./models/breeds.js');
 var Shelter = require('./models/shelters.js');
 var Profile = require('./models/profiles.js');
+var User = require('./models/users.js');
 
 app.get('/breeds', function(req, res) {
     Breed.find(function(err, breed){
@@ -17,14 +21,12 @@ app.get('/breeds', function(req, res) {
     });
 });
 app.post('/breeds', function(req, res) {
-    console.log(req.body);
     if(req.body.pk){
-      Breed.update({name: req.body.value},function(breed){res.json(breed);});
+      Breed.update({name: req.body.value} ,function(breed){res.json(breed);});
     }else{
       Breed.create({name: req.body.name},function(breed){res.json(breed);});
     }
 });
-
 app.get('/shelters', function(req, res) {
     Shelter.find(function(err, shelter){
         res.send(shelter);

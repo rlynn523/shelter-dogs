@@ -1,5 +1,6 @@
 $(function() {
     $.fn.editable.defaults.mode = 'inline';
+
     function displayDogProfiles(data) {
         for (i = 0; i < data.length; i++) {
             var dogs = data[i];
@@ -27,23 +28,32 @@ $(function() {
     function displaySavedBreeds(data) {
         for (i = 0; i < data.length; i++) {
             var breed = data[i].name;
-            $('#savedBreeds').append('<p>' + '<a href="#" class="savedBreeds" data-type="text" data-pk="1" data-url="/breeds" data-title="Enter username">'+ breed + '</a>'+'</p>');
+            var id = data[i]._id;
+            console.log(id);
+            $('#savedBreeds').append('<p>' + '<a href="#" class="savedBreeds" data-type="text" data-pk=' + id + ' data-url="/breeds">' + breed + '</a>' + '</p>');
         }
         $('.savedBreeds').editable({
-          ajaxOptions: {
-            dataType: 'json',
-            contentType: 'application/json',
-          },
-          params: function(params) { return JSON.stringify(params); },
+            pk: 1,
+            type: 'text',
+            url: '/breeds',
+            ajaxOptions: {
+                dataType: 'json',
+                contentType: 'application/json',
+            },
+            params: function(params) {
+                return JSON.stringify(params);
+            },
         });
     }
-    $('#breeds-form').submit(function(e){
+    $('#breeds-form').submit(function(e) {
         e.preventDefault();
-        var input=$('#save-breeds').val();
+        var input = $('#save-breeds').val();
         $.ajax({
             url: 'http://localhost:8080/breeds',
             type: 'post',
-            data: JSON.stringify({name: input}),
+            data: JSON.stringify({
+                name: input
+            }),
             dataType: 'json',
             contentType: 'application/json',
             success: function(data) {
@@ -51,7 +61,7 @@ $(function() {
             },
         });
         $('#savedBreeds').append('<p>' + input + '</p>');
-        $('save-breeds').val('');
+        $('#save-breeds').val('');
     });
 
     function displaySavedShelters(data) {
@@ -60,7 +70,6 @@ $(function() {
             $('#savedShelters').append('<p>' + shelter + '</p>');
         }
     }
-
     $.ajax({
         url: 'http://localhost:8080/breeds',
         type: 'get',
