@@ -18,7 +18,7 @@ var User = require('./models/users.js');
 
 app.get('/breeds', function(req, res) {
     Breed.find(function(err, breed) {
-        if(err){
+        if (err) {
             return res.status(500);
         }
         res.send(breed);
@@ -52,12 +52,12 @@ app.post('/breeds', function(req, res) {
         });
     }
 });
-app.delete('/breeds', function(req, res) {
+app.delete('/breeds/:id', function(req, res) {
     Breed.remove({
-            _id: req.body.pk,
+            _id: req.params.id,
         },
         function(err, breed) {
-            if(err){
+            if (err) {
                 return res.status(500).json({
                     message: 'Internal Server Error'
                 });
@@ -67,7 +67,7 @@ app.delete('/breeds', function(req, res) {
 });
 app.get('/shelters', function(req, res) {
     Shelter.find(function(err, shelter) {
-        if(err){
+        if (err) {
             return res.status(500);
         }
         res.send(shelter);
@@ -88,7 +88,7 @@ app.post('/shelters', function(req, res) {
                 if (err) {
                     return res.status(500);
                 }
-                res.status(201).json(shelter);
+                res.status(200).json(shelter);
             });
     } else {
         Shelter.create({
@@ -101,15 +101,39 @@ app.post('/shelters', function(req, res) {
         });
     }
 });
+app.delete('/shelters/:id', function(req, res) {
+    Shelter.remove({
+            _id: req.params.id,
+        },
+        function(err, shelter) {
+            if (err) {
+                return res.status(500).json({
+                    message: 'Internal Server Error'
+                });
+            }
+            res.status(200).json(shelter);
+        });
+});
 app.get('/profiles', function(req, res) {
     Profile.find(function(err, profile) {
-        if(err){
+        if (err) {
             return res.status(500);
         }
         res.send(profile);
     });
 });
-
+app.post('/profiles', function(req, res) {
+    if (req.body.pk) {
+        Profile.create({
+            name: req.body.name
+        }, function(err, shelter) {
+            if (err) {
+                return res.status(500);
+            }
+            res.status(201).json(profile);
+        });
+    }
+});
 app.listen(process.env.PORT || 8080);
 
 module.exports.app = app;
