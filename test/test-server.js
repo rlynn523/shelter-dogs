@@ -42,18 +42,34 @@ describe('Shelter Dog App', function() {
 });
 
 describe('Testing Routes', function() {
-    Breed.create({
-        name: 'black lab'
+    // need to create function to clean after running tests
+    before(function(done){
+        // change to use promises
+        Breed.create({
+            name: 'black lab'
+        },function(){
+          Shelter.create({
+              name: 'Pitt Pups'
+          },function(){
+            Profile.create({
+                name: 'rango',
+                breed: 'cattle dog',
+                age: 'young',
+                description: 'male',
+            },function(){
+              done();
+            });
+          });
+        });
     });
-    Shelter.create({
-        name: 'Pitt Pups'
-    });
-    Profile.create({
-        name: 'rango',
-        breed: 'cattle dog',
-        age: 'young',
-        sex: 'male',
-        shelter: 'south hills resort'
+    after(function(done) {
+        Breed.remove(function() {
+            Shelter.remove(function(){
+                Profile.remove(function(){
+                    done();
+                });
+            });
+        });
     });
     it('GET route for saved BREEDS', function(done) {
         chai.request(app)
@@ -147,13 +163,11 @@ describe('Testing Routes', function() {
                 res.body[0].should.have.property('name');
                 res.body[0].should.have.property('breed');
                 res.body[0].should.have.property('age');
-                res.body[0].should.have.property('sex');
-                res.body[0].should.have.property('shelter');
+                res.body[0].should.have.property('description');
                 res.body[0].name.should.be.a('string');
                 res.body[0].breed.should.be.a('string');
                 res.body[0].age.should.be.a('string');
-                res.body[0].sex.should.be.a('string');
-                res.body[0].shelter.should.be.a('string');
+                res.body[0].description.should.be.a('string');
                 done();
             });
     });

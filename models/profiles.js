@@ -5,8 +5,7 @@ var dogProfile = new Schema ({
     name: String,
     breed: String,
     age: String,
-    sex: String,
-    shelter: String
+    description: String,
 });
 
 var Profile = mongoose.model('Profile', dogProfile);

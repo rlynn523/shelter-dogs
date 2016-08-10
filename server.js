@@ -123,16 +123,32 @@ app.get('/profiles', function(req, res) {
     });
 });
 app.post('/profiles', function(req, res) {
-    if (req.body.pk) {
+    if (req.body) {
         Profile.create({
-            name: req.body.name
-        }, function(err, shelter) {
+            name: req.body.name,
+            breed: req.body.breed,
+            age: req.body.age,
+            description: req.body.description
+        }, function(err, profile) {
             if (err) {
                 return res.status(500);
             }
             res.status(201).json(profile);
         });
     }
+});
+app.delete('/profiles/:id', function(req, res) {
+    Profile.remove({
+            _id: req.params.id,
+        },
+        function(err, profile) {
+            if (err) {
+                return res.status(500).json({
+                    message: 'Internal Server Error'
+                });
+            }
+            res.status(200).json(profile);
+        });
 });
 app.listen(process.env.PORT || 8080);
 
