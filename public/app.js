@@ -1,86 +1,89 @@
 $(function() {
     // $.fn.editable.defaults.mode = 'inline';
+    var petFind = 'http://api.petfinder.com/pet.find';
     var key = '?key=781bec9e50bf85caa863d233753cf237';
     var dog = '&animal=dog';
-    var location = '&location=pittsburgh,pa';
+    var location = '&location=';
     var format = '&format=json';
-    var petFind = 'http://api.petfinder.com/pet.find';
-
-    $.ajax({
-        url: petFind + key + dog + location + format,
-        type: 'get',
-        dataType: 'jsonp',
-        success: function(data) {
-            displayDogProfiles(data.petfinder.pets.pet);
-            console.log('get pets');
-            $('#results').on('click', '#saveProfile', function() {
-                var profiles = data.petfinder.pets.pet;
-                var name = $(this).attr('name');
-                var breed = $(this).attr('breed');
-                var age = $(this).attr('age');
-                $(this).closest('.profile').add();
-                $.ajax({
-                    url: 'http://localhost:8080/profiles',
-                    type: 'post',
-                    dataType: 'json',
-                    data: JSON.stringify({
-                        name: name,
-                        breed: breed,
-                        age: age
-                    }),
-                    contentType: 'application/json',
-                });
-            });
-            $('#results').on('click','#saveBreed', function() {
-                var breed = $(this).attr('breed');
-                $(this).closest('.profile').add();
-                $.ajax({
-                    url: 'http://localhost:8080/breeds',
-                    type: 'post',
-                    dataType: 'json',
-                    data: JSON.stringify({
-                        name: breed,
-                    }),
-                    contentType: 'application/json',
-                });
-            });
-        }
-    });
 
     function displayDogProfiles(profiles) {
-        var input = $('#searchBar').val();
+        var searchInput = $('#searchBar').val();
         for (i = 0; i < profiles.length; i++) {
+            console.log(searchLocation);
             var breed = profiles[i].breeds.breed.$t;
             var dataId = profiles[i].id.$t;
-            if (input == breed) {
-            console.log(profiles[i].breeds.breed.$t);
+            if (searchInput == breed) {
                 console.log('found search term');
                 $('#results').append('<p class="profile">' + 'name: ' + profiles[i].name.$t + '<br>' + 'breed: ' +
                     profiles[i].breeds.breed.$t + ' <img src="images/check.png" id="saveBreed"' + ' breed= ' + profiles[i].breeds.breed.$t + ' style="width: 20px">' + '<br>' + 'age: ' + profiles[i].age.$t + '<br>' + 'description: ' + profiles[i].description.$t +
                     '<br>' + 'click to save profile ' + '<img src="images/check.png" id="saveProfile"' + ' name= ' + profiles[i].name.$t + ' breed= ' + profiles[i].breeds.breed.$t + ' age= ' + profiles[i].age.$t + ' description= ' + profiles[i].description.$t + ' style="width: 20px">' + '</p>');
             }
         }
-
-        $('#searchBar').keydown(function(e) {
-            if (e.keyCode === 13) {
-                e.preventDefault();
-                displayDogProfiles(profiles);
-                console.log('enter button pressed');
-                $('#searchBar').val('');
-            }
-        });
-        $('#search').submit(function(e) {
-            e.preventDefault();
-            console.log('submit button pressed');
-            var input = $('#searchBar').val();
-            if (input === '') {
-                alert('Please Search A Breed!');
-            } else {
-                displayDogProfiles(profiles);
-            }
-            $('#searchBar').val('');
-        });
     }
+    $('#searchBar').keydown(function(e) {
+        if (e.keyCode === 13) {
+            e.preventDefault();
+            displayDogProfiles(profiles);
+            console.log('enter button pressed');
+            $('#searchBar').val('');
+        }
+    });
+
+    $('#search').submit(function(e) {
+        e.preventDefault();
+        console.log('submit button pressed');
+        var searchInput = $('#searchBar').val();
+        var searchLocation = $('#searchLocation').val();
+        console.log(typeof(searchLocation));
+        console.log(searchLocation);
+        if (searchInput === '') {
+            alert('Please Search A Breed!');
+        } else {
+            $.ajax({
+                url: petFind + key + dog + location + searchLocation + format,
+                type: 'get',
+                dataType: 'jsonp',
+                beforeSend: function(jqXHR, settings) { console.log(settings.url); },
+                success: function(data) {
+                    displayDogProfiles(data.petfinder.pets.pet);
+                    console.log('get pets');
+                    $('#results').on('click', '#saveProfile', function() {
+                        var profiles = data.petfinder.pets.pet;
+                        var name = $(this).attr('name');
+                        var breed = $(this).attr('breed');
+                        var age = $(this).attr('age');
+                        $(this).closest('.profile').add();
+                        $.ajax({
+                            url: 'http://localhost:8080/profiles',
+                            type: 'post',
+                            dataType: 'json',
+                            data: JSON.stringify({
+                                name: name,
+                                breed: breed,
+                                age: age
+                            }),
+                            contentType: 'application/json',
+                        });
+                    });
+                    $('#results').on('click', '#saveBreed', function() {
+                        var breed = $(this).attr('breed');
+                        $(this).closest('.profile').add();
+                        $.ajax({
+                            url: 'http://localhost:8080/breeds',
+                            type: 'post',
+                            dataType: 'json',
+                            data: JSON.stringify({
+                                name: breed,
+                            }),
+                            contentType: 'application/json',
+                        });
+                    });
+                }
+            });
+            displayDogProfiles(profiles);
+        }
+        $('#searchBar').val('');
+    });
     // GET request for saved profiles in db
     $.ajax({
         url: 'http://localhost:8080/profiles',

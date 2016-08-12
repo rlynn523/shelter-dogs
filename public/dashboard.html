@@ -19,23 +19,37 @@
                 active: false,
                 heightStyle: 'content'
             });
-        });
+            var breedArray = [];
+            $.ajax({
+                url: 'http://api.petfinder.com/breed.list?key=781bec9e50bf85caa863d233753cf237&animal=dog&format=json',
+                type: 'get',
+                dataType: 'json',
+                contentType: 'application/json',
+                success: function(data) {
+                    for(i=0;i<data.petfinder.breeds.breed.length;i++) {
+                        var breeds = data.petfinder.breeds.breed[i].$t;
+                    }
+                        $('#save-breeds').autocomplete({
+                            source: breeds
+                        })
+                    }
+                })
+            });
     </script>
     <title>Dashboard</title>
 </head>
 
 <body>
     <p>Doggie Dashboard</p>
-    <a href='/search-results.html'><button class='start-search'>Start your search!</button></a>
-    <br>
-    <br>
     <div id='accordion'>
         <h3><i class='material-icons'>pets</i>Saved Dog Profiles</h3>
-        <div id='savedProfiles'></div>
+        <div id='savedProfiles'>
+            <a href='/search-results.html'><button class='start-search'>Start your search!</button></a>
+        </div>
         <h3><i class='material-icons'>pets</i>Saved Breeds</h3>
         <div id='savedBreeds'>
             <form id='breeds-form' action='/breeds' method='post'>
-                <input type='text' id='save-breeds' placeholder='Save breeds...'>
+                <input id='save-breeds' placeholder='Save breeds...'>
                 <input type='submit' id='submit-breeds'>
             </form>
         </div>
