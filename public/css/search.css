@@ -1,0 +1,25 @@
+html {
+  	box-sizing: border-box;
+}
+*, *:before, *:after {
+ 	box-sizing: inherit;
+}
+.search-title, #search, .dashboard {
+    text-align: center;
+}
+.dashboard {
+    margin-bottom: 1em;
+}
+#search-results {
+    margin-left: 3%;
+    margin-top: 3%;
+}
+
+#saveBreed:hover{
+    cursor: pointer;
+    background: grey;
+}
+#saveProfile:hover{
+    cursor: pointer;
+    background: grey;
+}

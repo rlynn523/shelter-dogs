@@ -1,0 +1,14 @@
+html {
+  	box-sizing: border-box;
+}
+*, *:before, *:after {
+ 	box-sizing: inherit;
+}
+#deleteBreed:hover{
+    cursor: pointer;
+    background: red;
+}
+#deleteProfile:hover{
+    cursor: pointer;
+    background: red;
+}
