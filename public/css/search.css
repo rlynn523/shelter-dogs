@@ -4,7 +4,7 @@ html {
 *, *:before, *:after {
  	box-sizing: inherit;
 }
-.search-title, #search, .dashboard {
+.search-title, #search, .dashboard, .restart {
     text-align: center;
 }
 .dashboard {
@@ -22,4 +22,8 @@ html {
 #saveProfile:hover{
     cursor: pointer;
     background: grey;
+}
+.restart {
+    margin-top: 2%;
+    margin-bottom: 2%;
 }
