@@ -92,7 +92,9 @@ app.post('/shelters', function(req, res) {
             });
     } else {
         Shelter.create({
-            name: req.body.name
+            name: req.body.name,
+            address: req.body.address,
+            email: req.body.email
         }, function(err, shelter) {
             if (err) {
                 return res.status(500);
