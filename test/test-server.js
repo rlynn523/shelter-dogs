@@ -49,7 +49,9 @@ describe('Testing Routes', function() {
             name: 'black lab'
         },function(){
           Shelter.create({
-              name: 'Pitt Pups'
+              name: 'Pitt Pups',
+              address: '123 Rango Lane',
+              email: 'rangorocks@gmail.com'
           },function(){
             Profile.create({
                 name: 'rango',
@@ -120,7 +122,11 @@ describe('Testing Routes', function() {
                 res.body.should.be.a('array');
                 res.body[0].should.be.a('object');
                 res.body[0].should.have.property('name');
+                res.body[0].should.have.property('address');
+                res.body[0].should.have.property('email');
                 res.body[0].name.should.be.a('string');
+                res.body[0].address.should.be.a('string');
+                res.body[0].email.should.be.a('string');
                 done();
             });
     });
@@ -128,14 +134,20 @@ describe('Testing Routes', function() {
         chai.request(app)
             .post('/shelters')
             .send({
-                'name': 'SPCA'
+                'name': 'SPCA',
+                'address': '123 Rango Lane',
+                'email': 'rangorocks@gmail.com'
             })
             .end(function(err, res) {
                 res.should.be.json;
                 res.should.have.status(201);
                 res.body.should.be.a('object');
                 res.body.name.should.equal('SPCA');
+                res.body.address.should.equal('123 Rango Lane');
+                res.body.email.should.equal('rangorocks@gmail.com');
                 res.body.name.should.be.a('string');
+                res.body.address.should.be.a('string');
+                res.body.email.should.be.a('string');
                 done();
             });
     });
