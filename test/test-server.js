@@ -30,9 +30,18 @@ describe('Shelter Dog App', function() {
                 done();
             });
     });
-    it('connect to search results page', function(done) {
+    it('connect to search pets page', function(done) {
         chai.request(app)
-            .get('/search-results.html')
+            .get('/search-pets.html')
+            .end(function(err, res) {
+                res.should.have.status(200);
+                res.should.be.html;
+                done();
+            });
+    });
+    it('connect to search shelters page', function(done) {
+        chai.request(app)
+            .get('/search-shelters.html')
             .end(function(err, res) {
                 res.should.have.status(200);
                 res.should.be.html;
@@ -43,31 +52,31 @@ describe('Shelter Dog App', function() {
 
 describe('Testing Routes', function() {
     // need to create function to clean after running tests
-    before(function(done){
+    before(function(done) {
         // change to use promises
         Breed.create({
             name: 'black lab'
-        },function(){
-          Shelter.create({
-              name: 'Pitt Pups',
-              address: '123 Rango Lane',
-              email: 'rangorocks@gmail.com'
-          },function(){
-            Profile.create({
-                name: 'rango',
-                breed: 'cattle dog',
-                age: 'young',
-                description: 'male',
-            },function(){
-              done();
+        }, function() {
+            Shelter.create({
+                name: 'Pitt Pups',
+                address: '123 Rango Lane',
+                email: 'rangorocks@gmail.com'
+            }, function() {
+                Profile.create({
+                    name: 'rango',
+                    breed: 'cattle dog',
+                    age: 'young',
+                    description: 'male',
+                }, function() {
+                    done();
+                });
             });
-          });
         });
     });
     after(function(done) {
         Breed.remove(function() {
-            Shelter.remove(function(){
-                Profile.remove(function(){
+            Shelter.remove(function() {
+                Profile.remove(function() {
                     done();
                 });
             });
@@ -181,6 +190,44 @@ describe('Testing Routes', function() {
                 res.body[0].age.should.be.a('string');
                 res.body[0].description.should.be.a('string');
                 done();
+            });
+    });
+    it('POST route for saved PROFILES', function(done) {
+        chai.request(app)
+            .post('/profiles')
+            .send({
+                name: 'rango',
+                breed: 'cattle dog',
+                age: 'young',
+                description: 'male'
+            })
+            .end(function(err, res) {
+                res.should.have.status(201);
+                res.should.be.json;
+                res.body.should.be.a('object');
+                res.body.name.should.equal('rango');
+                res.body.breed.should.equal('cattle dog');
+                res.body.age.should.equal('young');
+                res.body.description.should.equal('male');
+                res.body.name.should.be.a('string');
+                res.body.breed.should.be.a('string');
+                res.body.age.should.be.a('string');
+                res.body.description.should.be.a('string');
+                done();
+            });
+    });
+    it('DELETE route for saved PROFILES', function(done) {
+        chai.request(app)
+            .get('/profiles')
+            .end(function(err, res) {
+                chai.request(app)
+                    .delete('/profiles/' + res.body[0]._id)
+                    .end(function(err, res) {
+                        res.should.be.json;
+                        res.should.have.status(200);
+                        res.body.should.be.a('object');
+                        done();
+                    });
             });
     });
 });
