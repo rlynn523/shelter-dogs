@@ -49,7 +49,8 @@ $(function() {
 
     // click the check image to save a breed to your dashboard
     $('#search-results').on('click', '#saveBreed', function() {
-        var breed = $(this).attr('breed');
+        var breed = $(this).data('breed').replace(/\s+/g, '-');
+        console.log(breed);
         $(this).closest('.profile-info').add();
         $.ajax({
             url: 'http://localhost:8080/breeds',
@@ -65,7 +66,8 @@ $(function() {
     // click the check image to save a profile to your dashboard
     $('#search-results').on('click', '#saveProfile', function() {
         var name = $(this).attr('name');
-        var breed = $(this).attr('breed');
+        var breed = $(this).data('breed').replace(/\s+/g, '-');
+        console.log(breed);
         var age = $(this).attr('age');
         $(this).closest('.profile-info').add();
         $.ajax({
@@ -93,13 +95,14 @@ $(function() {
             } else {        
                 mixBreeds = breeds.$t;      
             }
+            mixBreeds = mixBreeds.trim();
             $('#search-results').append('<img src=' + profiles[i].media.photos.photo[i].$t +
                 ' width=250>' + '</img>' + '<p class="profile-info">' + ' name: ' + profiles[i].name.$t +
                 '<br>' + 'breed: ' + mixBreeds + ' <img src="images/check.png" id="saveBreed"' +
-                ' breed= ' + profiles[i].breeds.breed.$t + ' style="width: 20px">' + '<br>' + 'age: ' + profiles[i].age.$t +
+                ' data-breed="'+ mixBreeds + '" style="width: 20px">' + '<br>' + 'age: ' + profiles[i].age.$t +
                 '<br>' + 'description: ' + profiles[i].description.$t + '<br>' + 'click to save profile ' +
-                '<img src="images/check.png" id="saveProfile"' + ' name= ' + profiles[i].name.$t + ' breed= ' +
-                mixBreeds + ' age= ' + profiles[i].age.$t + ' description= ' + profiles[i].description.$t +
+                '<img src="images/check.png" id="saveProfile"' + ' name= ' + profiles[i].name.$t + ' data-breed="' +
+                mixBreeds + '" age= ' + profiles[i].age.$t + ' description= ' + profiles[i].description.$t +
                 ' style="width: 20px">' + '</p>');
         }
     }
