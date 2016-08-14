@@ -21,7 +21,6 @@ $(function() {
         if (e.keyCode === 13) {
             e.preventDefault();
             displayDogProfiles(profiles);
-            console.log('enter button pressed');
             $('#searchBar').val('');
             $('#searchLocation').val('');
         }
@@ -29,7 +28,6 @@ $(function() {
 
     $('#search').submit(function(e) {
         e.preventDefault();
-        console.log('submit button pressed');
         var searchBar = $('#searchBar').val();
         var searchInput = '&breed=' + $('#searchBar').val();
         var searchLocation = $('#searchLocation').val();
@@ -148,7 +146,6 @@ $(function() {
                 url: 'http://localhost:8080/breeds/' + $(this).siblings('a').attr('data-pk'),
                 type: 'delete',
             });
-            console.log('deleted breed');
         });
         $('.savedBreeds').editable({
             ajaxOptions: {
@@ -180,9 +177,9 @@ $(function() {
     function displaySavedShelters(data) {
         for (i = 0; i < data.length; i++) {
             var id = data[i]._id;
-            var name = data[i].name;
-            var address = data[i].address;
-            var email = data[i].email;
+            var name = data[i].name.replace(/-/g, " ");
+            var address = data[i].address.replace(/-/g, " ");
+            var email = data[i].email.replace(/-/g, " ");
             $('#savedShelters').append('<p class="shelter">' +
                 '<a href="#" class="savedShelters" data-type="text" data-pk=' + id +
                 ' data-url="/shelters">' + name + '<br>' + address + '<br>' + email + '</a>' +
@@ -220,8 +217,8 @@ $(function() {
                         data.petfinder.shelters.shelter[i].state.$t + ' ' + data.petfinder.shelters.shelter[i].zip.$t);
                     var email = data.petfinder.shelters.shelter[i].email.$t;
                     $('#searchShelters').append('<p class = "shelter-info">' + name +
-                        '<br>' + address + '<br>' + email + '<img src="images/check.png" id="saveShelter" name= ' + name + ' address= ' + address + ' email= ' + email +
-                        ' style="width: 20px">' + '</p>');
+                        '<br>' + address + '<br>' + email + '<img src="images/check.png" id="saveShelter" data-name="' + name + '" data-address="' + address + '" data-email="' + email +
+                        '" style="width: 20px">' + '</p>');
                 }
             },
             contentType: 'application/json',
@@ -230,9 +227,9 @@ $(function() {
         $('#search-local').val('');
     });
     $('#searchShelters').on('click', '#saveShelter', function() {
-        var name = $(this).attr('name');
-        var address = $(this).attr('address');
-        var email = $(this).attr('email');
+        var name = $(this).data('name').replace(/\s+/g, '-');
+        var address = $(this).data('address').replace(/\s+/g, '-');
+        var email = $(this).data('email').replace(/\s+/g, '-');
         $(this).closest('.shelter-info').add();
         $.ajax({
             url: 'http://localhost:8080/shelters',
