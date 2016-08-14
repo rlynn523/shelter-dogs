@@ -14,7 +14,9 @@ html {
     margin-left: 3%;
     margin-top: 3%;
 }
-
+#saveBreed, #saveProfile {
+    vertical-align: middle;
+}
 #saveBreed:hover{
     cursor: pointer;
     background: grey;

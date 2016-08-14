@@ -8,50 +8,73 @@
     <link rel="stylesheet" href="css/dashboard.css">
     <link rel="stylesheet" href="css/normalize.css">
     <link href='https://fonts.googleapis.com/icon?family=Material+Icons' rel='stylesheet'>
-    <link href='https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.0/jquery-ui.css' rel='stylesheet'>
     <link href='//cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.0/jqueryui-editable/css/jqueryui-editable.css' rel='stylesheet' />
     <script src='https://code.jquery.com/jquery-1.12.4.js'></script>
     <script src='https://code.jquery.com/ui/1.12.0/jquery-ui.js'></script>
     <script src='//cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.0/jqueryui-editable/js/jqueryui-editable.min.js'></script>
+    <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css' integrity='sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u' crossorigin='anonymous'>
+    <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css' integrity='sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp' crossorigin='anonymous'>
+    <script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js' integrity='sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa' crossorigin='anonymous'></script>
     <script type='text/javascript' src='app.js'></script>
     <script>
-    $.fn.editable.defaults.mode = 'inline';
+        $.fn.editable.defaults.mode = 'inline';
         $(function() {
-            $('#accordion').accordion({
-                collapsible: true,
-                active: false,
-                heightStyle: 'content'
-            });
+            $('.title').show('drop', {
+                direction: 'up'
+            }, 2000);
+            $('#buttons').show('drop', {
+                direction: 'up'
+            }, 2000);
+            $('#saved-info').show('drop', {
+                direction: 'up'
+            }, 2000);
         });
     </script>
     <title>Dashboard</title>
 </head>
 
 <body>
-    <p>Doggie Dashboard</p>
-    <a href='/search-pets.html'>
-        <button class='start-search'>Start your pet search!</button>
-    </a>
-    <a href='/search-shelters.html'>
-        <button>Search for Local Shelters!</button>
-    </a>
-    <div id='accordion'>
-        <h3><i class='material-icons'>pets</i>Saved Dog Profiles</h3>
-        <div id='savedProfiles'>
+    <div class='jumbotron'>
+        <div class='title-container'>
+            <h1 class='title' style='display: none'>Doggie <br> Dashboard</h1>
         </div>
-        <h3><i class='material-icons'>pets</i>Saved Breeds</h3>
-        <div id='savedBreeds'>
-            <form id='breeds-form' action='/breeds' method='post'>
-                <input id='save-breeds' placeholder='Save breeds...'>
-                <input type='submit' id='submit-breeds'>
-            </form>
+        <div class='container-fluid' id='buttons' style='display: none'>
+            <div class='row'>
+                <div class='col-md-6 col-sm-12 col-xs-12'>
+                    <a href='/search-pets.html'>
+                        <button class='btn btn-primary' id='button-one'><i class='material-icons' id='pets'>pets</i>Search Pets</button>
+                    </a>
+                </div>
+                <div class='col-md-6 col-sm-12 col-xs-12'>
+                    <a href='/search-shelters.html'>
+                        <button class='btn btn-primary' id='button-two'><i class="material-icons" id='place'>place</i>Search Shelters</button>
+                    </a>
+                </div>
+            </div>
         </div>
-        <h3><i class='material-icons'>pets</i>Saved Shelters</h3>
-        <div id='savedShelters'>
-            <form id='shelters-form' action='/shelters' method='post'>
-                <input type='text' id='save-shelters' placeholder='Save shelters...'>
-                <input type='submit' id='submit-shelters'>
-            </form>
+    </div>
+    <div class='container-fluid' id='saved-info' style='display: none'>
+        <div id='rows'>
+            <div class='col-md-4 col-sm-12 col-xs-12'>
+                <button type="button"  class="btn btn-info" data-toggle="collapse" data-target="#savedProfiles"  aria-expanded="false" aria-controls="#savedProfiles" ><i class='material-icons' id='pets'>pets</i>Saved Dog Profiles</button>
+                <div class='collapse' id='savedProfiles'></div>
+            </div>
+            <div class='col-md-4 col-sm-12 col-xs-12'>
+            <button type="button"  class="btn btn-info" data-toggle="collapse" data-target="#savedBreeds" aria-expanded="false" aria-controls="#savedBreeds"><i class='material-icons' id='pets'>pets</i>Saved Breeds</button>
+                <div class='collapse'id='savedBreeds'>
+                </div>
+            </div>
+            <div class='col-md-4 col-sm-12 col-xs-12'>
+            <button type="button"  class="btn btn-info" data-toggle="collapse" data-target="#savedShelters"  aria-expanded="false" aria-controls="#savedShelters" ><i class='material-icons' id='pets'>pets</i>Saved Shelters</button>
+                <div class='collapse' id='savedShelters'>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class='container-fluid' id='footer'>
+        <div class='row'>
+            <div class='col-md-12 col-sm-12 col-xs-12' <p>Powered by <a href='https://www.petfinder.com/'>Petfinder.com</a></p>
+            </div>
         </div>
     </div>
 </body>
