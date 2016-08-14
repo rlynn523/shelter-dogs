@@ -4,10 +4,10 @@ html {
 *, *:before, *:after {
  	box-sizing: inherit;
 }
-.search-title, #search, .dashboard, .restart {
+.search-title, #search, .buttons, .restart {
     text-align: center;
 }
-.dashboard {
+.buttons {
     margin-bottom: 1em;
 }
 #search-results {

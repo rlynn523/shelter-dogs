@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Search Local Shelters</title>
+    <link rel="stylesheet" href="css/shelters.css">
+    <link rel="stylesheet" href="css/normalize.css">
+    <link href='https://fonts.googleapis.com/icon?family=Material+Icons' rel='stylesheet'>
+    <script src='https://code.jquery.com/jquery-1.12.4.js'></script>
+    <script type='text/javascript' src='app.js'></script>
+</head>
+
+<body>
+    <div class=buttons>
+        <a href='/dashboard.html'>
+            <button>Return To Doggie Dashboard!</button>
+        </a>
+        <a href='/search-pets.html'>
+            <button class='start-search'>Start your pet search!</button>
+        </a>
+    </div>
+    <h3><i class='material-icons'>pets</i>Search For Local Shelters</h3>
+    <form id='local-form' action='/shelters' method='post'>
+        <input type='text' id='search-local' placeholder='Search shelters...'>
+        <input type='submit' id='enter-shelters'>
+    </form>
+    <div class='restart'>
+        <button class='removeSearch'>Restart Search</button>
+    </div>
+    <div id='searchShelters'></div>
+</body>
+
+</html>

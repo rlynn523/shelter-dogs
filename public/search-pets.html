@@ -6,24 +6,11 @@
     <meta name='viewport' content='width=device-width, initial-scale=1.0'>
     <meta http-equiv='X-UA-Compatible' content='ie=edge'>
     <title>Search Results</title>
-    <link rel="stylesheet" href="css/search.css">
+    <link rel="stylesheet" href="css/pets.css">
     <link rel="stylesheet" href="css/normalize.css">
-    <link href='https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.0/jquery-ui.css' rel='stylesheet'>
     <link href='https://fonts.googleapis.com/icon?family=Material+Icons' rel='stylesheet'>
-    <link href='https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.0/jquery-ui.css' rel='stylesheet'>
-    <script src='https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js'></script>
     <script src='https://code.jquery.com/jquery-1.12.4.js'></script>
-    <script src='https://code.jquery.com/ui/1.12.0/jquery-ui.js'></script>
     <script type='text/javascript' src='app.js'></script>
-    <script>
-        $(function() {
-            $('#accordionShelter').accordion({
-                collapsible: true,
-                active: false,
-                heightStyle: 'content'
-            });
-        });
-    </script>
     <!-- <script>
     $(function() {
         $.ajax({
@@ -46,9 +33,12 @@
 
 <body>
     <p class='search-title'>Starting Searching For Your New Best Friend!</p>
-    <div class=dashboard>
+    <div class=buttons>
         <a href='/dashboard.html'>
             <button>Return To Doggie Dashboard!</button>
+        </a>
+        <a href='/search-shelters.html'>
+            <button>Search for Local Shelters!</button>
         </a>
     </div>
     <form id='search'>
@@ -58,15 +48,6 @@
     </form>
     <div class='restart'>
         <button class='removeSearch'>Restart Search</button>
-    </div>
-    <div id='accordionShelter'>
-        <h3><i class='material-icons'>pets</i>Search For Local Shelters</h3>
-        <div id='searchShelters'>
-            <form id='local-form' action='/shelters' method='post'>
-                <input type='text' id='search-local' placeholder='Search shelters...'>
-                <input type='submit' id='enter-shelters'>
-            </form>
-        </div>
     </div>
     <div id='search-results'></div>
 </body>

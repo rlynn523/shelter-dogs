@@ -15,6 +15,7 @@
     <script src='//cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.0/jqueryui-editable/js/jqueryui-editable.min.js'></script>
     <script type='text/javascript' src='app.js'></script>
     <script>
+    $.fn.editable.defaults.mode = 'inline';
         $(function() {
             $('#accordion').accordion({
                 collapsible: true,
@@ -28,8 +29,11 @@
 
 <body>
     <p>Doggie Dashboard</p>
-    <a href='/search-results.html'>
-        <button class='start-search'>Start your search!</button>
+    <a href='/search-pets.html'>
+        <button class='start-search'>Start your pet search!</button>
+    </a>
+    <a href='/search-shelters.html'>
+        <button>Search for Local Shelters!</button>
     </a>
     <div id='accordion'>
         <h3><i class='material-icons'>pets</i>Saved Dog Profiles</h3>
