@@ -50,7 +50,6 @@ $(function() {
     // click the check image to save a breed to your dashboard
     $('#search-results').on('click', '#saveBreed', function() {
         var breed = $(this).data('breed').replace(/\s+/g, '-');
-        console.log(breed);
         $(this).closest('.profile-info').add();
         $.ajax({
             url: 'http://localhost:8080/breeds',
@@ -132,7 +131,7 @@ $(function() {
 
     function displaySavedBreeds(data) {
         for (i = 0; i < data.length; i++) {
-            var breed = data[i].name;
+            var breed = data[i].name.replace(/-/g, " ");
             var id = data[i]._id;
             $('#savedBreeds').append('<p class="breed">' + '<a href="#" class="savedBreeds" data-type="text" data-pk=' + id + ' data-url="/breeds">' + breed + '</a>' + '<img src="images/clear.png" id="deleteBreed" style="width: 25px">' + '</p>');
         }
