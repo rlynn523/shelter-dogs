@@ -9,26 +9,19 @@
     <link rel="stylesheet" href="css/pets.css">
     <link rel="stylesheet" href="css/normalize.css">
     <link href='https://fonts.googleapis.com/icon?family=Material+Icons' rel='stylesheet'>
+    <link href='https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.0/jquery-ui.css' rel='stylesheet'>
     <script src='https://code.jquery.com/jquery-1.12.4.js'></script>
+    <script src='https://code.jquery.com/ui/1.12.0/jquery-ui.js'></script>
     <script type='text/javascript' src='app.js'></script>
-    <!-- <script>
-    $(function() {
-        $.ajax({
-            url: 'http://api.petfinder.com/breed.list?key=781bec9e50bf85caa863d233753cf237&animal=dog&format=json&callback=?',
-            type: 'get',
-            dataType: 'jsonp',
-            contentType: 'application/json',
-            success: function(data) {
-                for(i=0;i<data.petfinder.breeds.breed.length;i++) {
-                    var breeds = data.petfinder.breeds.breed[i].$t;
-                }
-                    $('#searchBar').autocomplete({
-                        source: breeds
-                    })
-                }
-            })
+    <script>
+        $(function() {
+            $('#accordionBreed').accordion({
+                collapsible: true,
+                active: false,
+                heightStyle: 'content'
+            });
         });
-    </script> -->
+    </script>
 </head>
 
 <body>
@@ -46,6 +39,11 @@
         <input type='text' id='searchLocation' placeholder='Ex: pittsburgh,pa or zip' />
         <input type='submit' id='submitButton' />
     </form>
+    <div id='accordionBreed'>
+        <h3><i class='material-icons'>pets</i>Searchable Dog Breeds</h3>
+        <div id='breedList'>
+        </div>
+    </div>
     <div class='restart'>
         <button class='removeSearch'>Restart Search</button>
     </div>

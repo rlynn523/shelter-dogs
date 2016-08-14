@@ -16,7 +16,31 @@ $(function() {
         $('#search-results').empty();
         $('#searchShelters').empty();
     });
+    /*Retrieves entire list of dog breeds to accordion, user can then make a
+    selection to search. */
 
+    $.ajax({
+        url: 'http://api.petfinder.com/breed.list?key=781bec9e50bf85caa863d233753cf237&animal=dog&format=json&callback=?',
+        type: 'get',
+        dataType: 'jsonp',
+        contentType: 'application/json',
+        success: function(data) {
+            for (i = 0; i < data.petfinder.breeds.breed.length; i++) {
+                $('#breedList').append('<p class=searchableBreed>' + data.petfinder.breeds.breed[i].$t +
+                    '<img src="images/check.png" id="searchBreed"' + ' data-breed="' + data.petfinder.breeds.breed[i].$t +
+                    '" style="width: 20px">' + '</p>');
+            }
+            $('#breedList').on('click', '#searchBreed', function() {
+                var breed = $(this).data('breed');
+                $('#searchBar').val(breed);
+                $('#accordionBreed').accordion({
+                    collapsible: true,
+                    active: true,
+                    heightStyle: 'content'
+                });
+            });
+        }
+    });
     $('#searchBar').keydown(function(e) {
         if (e.keyCode === 13) {
             e.preventDefault();
@@ -31,7 +55,7 @@ $(function() {
         var searchBar = $('#searchBar').val();
         var searchInput = '&breed=' + $('#searchBar').val();
         var searchLocation = $('#searchLocation').val();
-        if (searchBar === '') {
+        if (searchBar === '' || searchLocation === '') {
             alert('Please Enter Search Parameters!');
         } else {
             $.ajax({
@@ -131,6 +155,7 @@ $(function() {
             });
         }
     });
+
     /*~~~~~~~~ Saved Breeds ~~~~~~~~*/
 
     function displaySavedBreeds(data) {
