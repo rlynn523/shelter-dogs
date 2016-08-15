@@ -19,7 +19,7 @@ html {
 }
 #deleteBreed:hover{
     cursor: pointer;
-    background: red;
+    color: red !important;
 }
 #deleteProfile:hover{
     cursor: pointer;
@@ -29,6 +29,9 @@ html {
     margin: 4em;
     text-align: center;
 }
+.navbar-text {
+    text-align: center;
+}
 #pets, #home, #place, #deleteProfile {
     vertical-align: middle;
     padding-right: 0.313em;
@@ -36,10 +39,11 @@ html {
 .profile {
     text-align: left;
 }
-#buttons, #footer {
+#footer {
     margin: 4em;
     text-align: center
 }
-#button-one, #button-two {
-    margin: 2em;
+
+#saved-one, #saved-two, #saved-three {
+    margin-bottom: 2em;
 }

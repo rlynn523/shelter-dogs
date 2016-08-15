@@ -4,11 +4,29 @@ html {
 *, *:before, *:after {
  	box-sizing: inherit;
 }
-.search-title, #search, .buttons, .restart {
+#search{
     text-align: center;
 }
-.buttons {
-    margin-bottom: 1em;
+
+.jumbotron {
+     background: url('https://hd.unsplash.com/photo-1469225208447-8329cbd3cb3a');
+     background-size: cover;
+     background-repeat: no-repeat;
+     background-position: center;
+     height: 31.25em;
+     width: 100%;
+     background-position-y: 45%;
+}
+.title-container {
+    color: #FFFFFF;
+    margin-left: 1em;
+}
+#breedList {
+    text-align: left;
+}
+#home, #place, #pets{
+    vertical-align: middle;
+    padding-right: 0.313em;
 }
 #search-results {
     margin-left: 3%;

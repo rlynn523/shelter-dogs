@@ -13,12 +13,6 @@ $(function() {
         $('#searchShelters').empty();
     }
 
-    // Function that removes previous search results with the Restart Search Button
-    $('.removeSearch').click(function() {
-        $('#search-results').empty();
-        $('#searchShelters').empty();
-    });
-
     /* Retrieves entire list of dog breeds to accordion, user can then make a
     selection to search. */
     $.ajax({
@@ -36,11 +30,6 @@ $(function() {
             $('#breedList').on('click', '#searchBreed', function() {
                 var breed = $(this).data('breed');
                 $('#searchBar').val(breed);
-                $('#accordionBreed').accordion({
-                    collapsible: true,
-                    active: true,
-                    heightStyle: 'content'
-                });
             });
         }
     });
