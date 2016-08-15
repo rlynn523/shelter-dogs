@@ -5,6 +5,11 @@ $(function() {
     var location = '&location=';
     var format = '&format=json';
 
+    String.prototype.trunc = String.prototype.trunc ||
+        function(n) {
+            return (this.length > n) ? this.substr(0, n - 1) + '&hellip;' : this;
+        };
+
     // Function that removes previous search results
     function cleanSearch() {
         $('#searchBar').val('');
@@ -69,7 +74,7 @@ $(function() {
         var breed = $(this).data('breed').replace(/\s+/g, '-');
         $(this).closest('.profile-info').add();
         $.ajax({
-            url: 'http://localhost:8080/breeds',
+            url: 'mongodb://ryanlynn:rango123@ds145325.mlab.com:45325/heroku_t722w71v/breeds',
             type: 'post',
             dataType: 'json',
             data: JSON.stringify({
@@ -84,10 +89,10 @@ $(function() {
         var name = $(this).data('name').replace(/\s+/g, '-');
         var breed = $(this).data('breed').replace(/\s+/g, '-');
         var description = $(this).data('description').replace(/\s+/g, '-');
-        var age = $(this).attr('age');
+        var age = $(this).data('age');
         $(this).closest('.profile-info').add();
         $.ajax({
-            url: 'http://localhost:8080/profiles',
+            url: 'mongodb://ryanlynn:rango123@ds145325.mlab.com:45325/heroku_t722w71v/profiles',
             type: 'post',
             dataType: 'json',
             data: JSON.stringify({
@@ -113,20 +118,25 @@ $(function() {
             } else {        
                 mixBreeds = breeds.$t;      
             }
-            $('#search-results').append('<img src=' + profiles[i].media.photos.photo[i].$t +
-                ' width=250>' + '</img>' + '<p class="profile-info">' + '<strong>' + ' Name: ' + '</strong>' + profiles[i].name.$t +
-                '<br>' + '<strong>' + 'Breed: ' + '</strong>' + mixBreeds + ' <img src="images/check.png" id="saveBreed"' +
-                ' data-breed="' + mixBreeds + '" style="width: 20px">' + '<br>' + '<strong>' + 'Age: ' + '</strong>' + profiles[i].age.$t +
-                '<br>' + '<strong>' + 'Description: ' + '</strong>' + profiles[i].description.$t + '<br>' + '<strong>' + 'Click To Save Profile ' + '</strong>' +
-                '<img src="images/check.png" id="saveProfile"' + ' data-name="' + profiles[i].name.$t + '" data-breed="' +
-                mixBreeds + '" age= ' + profiles[i].age.$t + ' data-description="' + profiles[i].description.$t +
-                '" style="width: 20px">' + '</p>');
+            var clone = $('.hidden .card').clone();
+            clone = $(clone);
+            clone.find('.img').css('background', 'url(' + profiles[i].media.photos.photo[i].$t + ') no-repeat');
+            clone.find('.img').data('name', profiles[i].name.$t);
+            clone.find('.img').data('breed', mixBreeds);
+            clone.find('.img').data('age', profiles[i].age.$t);
+            clone.find('.img').data('description', profiles[i].description.$t.trunc(400));
+            clone.find('.card-title').html(profiles[i].name.$t);
+            clone.find('#breed').html(mixBreeds + ' <img src="images/check.png" id="saveBreed"' +
+                ' data-breed="' + mixBreeds + '" style="width: 20px">');
+            clone.find('#age').html(profiles[i].age.$t);
+            clone.find('#description').html(profiles[i].description.$t.trunc(400));
+            $('#search-results').append(clone);
         }
     }
 
     // GET request for saved profiles in user database
     $.ajax({
-        url: 'http://localhost:8080/profiles',
+        url: 'mongodb://ryanlynn:rango123@ds145325.mlab.com:45325/heroku_t722w71v/profiles',
         type: 'get',
         dataType: 'json',
         success: function(data) {
@@ -143,7 +153,7 @@ $(function() {
             $('#savedProfiles').on('click', '#deleteProfile', function() {
                 $(this).closest('.profile').remove();
                 $.ajax({
-                    url: 'http://localhost:8080/profiles/' + $(this).siblings('a').attr('data-pk'),
+                    url: 'mongodb://ryanlynn:rango123@ds145325.mlab.com:45325/heroku_t722w71v/profiles/' + $(this).siblings('a').attr('data-pk'),
                     type: 'delete',
                 });
             });
@@ -161,7 +171,7 @@ $(function() {
         $('#savedBreeds').on('click', '#deleteBreed', function() {
             $(this).closest('.breed').remove();
             $.ajax({
-                url: 'http://localhost:8080/breeds/' + $(this).siblings('a').attr('data-pk'),
+                url: 'mongodb://ryanlynn:rango123@ds145325.mlab.com:45325/heroku_t722w71v/breeds/' + $(this).siblings('a').attr('data-pk'),
                 type: 'delete',
             });
         });
@@ -192,7 +202,7 @@ $(function() {
         $('#savedShelters').on('click', '#deleteShelter', function() {
             $(this).closest('.shelter').remove();
             $.ajax({
-                url: 'http://localhost:8080/shelters/' + $(this).siblings('a').attr('data-pk'),
+                url: 'mongodb://ryanlynn:rango123@ds145325.mlab.com:45325/heroku_t722w71v/shelters/' + $(this).siblings('a').attr('data-pk'),
                 type: 'delete',
             });
         });
@@ -223,9 +233,9 @@ $(function() {
                     var address = (data.petfinder.shelters.shelter[i].city.$t + ', ' +
                         data.petfinder.shelters.shelter[i].state.$t + ' ' + data.petfinder.shelters.shelter[i].zip.$t);
                     var email = data.petfinder.shelters.shelter[i].email.$t;
-                    $('#searchShelters').append('<p class = "shelter-info">' + name +
-                        '<br>' + address + '<br>' + email + '<img src="images/check.png" id="saveShelter" data-name="' + name + '" data-address="' + address + '" data-email="' + email +
-                        '" style="width: 20px">' + '</p>');
+                    $('#searchShelters').append('<div class="col-xs-4" style="height: 100px">' + '<p class = "shelter-info">' + name +
+                        '<br>' + address + '<br>' + email + ' <img src="images/check.png" id="saveShelter" data-name="' + name + '" data-address="' + address + '" data-email="' + email +
+                        '" style="width: 20px">' + '</p>' + '</div>');
                 }
             },
             contentType: 'application/json',
@@ -240,7 +250,7 @@ $(function() {
         var email = $(this).data('email').replace(/\s+/g, '-');
         $(this).closest('.shelter-info').add();
         $.ajax({
-            url: 'http://localhost:8080/shelters',
+            url: 'mongodb://ryanlynn:rango123@ds145325.mlab.com:45325/heroku_t722w71v/shelters',
             type: 'post',
             dataType: 'json',
             data: JSON.stringify({
@@ -254,7 +264,7 @@ $(function() {
 
     // GET request for saved breeds in user database
     $.ajax({
-        url: 'http://localhost:8080/breeds',
+        url: 'mongodb://ryanlynn:rango123@ds145325.mlab.com:45325/heroku_t722w71v/breeds',
         type: 'get',
         dataType: 'json',
         success: function(data) {
@@ -265,7 +275,7 @@ $(function() {
 
     // GET request for saved shelters in the user database
     $.ajax({
-        url: 'http://localhost:8080/shelters',
+        url: 'mongodb://ryanlynn:rango123@ds145325.mlab.com:45325/heroku_t722w71v/shelters',
         type: 'get',
         dataType: 'json',
         success: function(data) {

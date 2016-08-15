@@ -4,8 +4,14 @@ html {
 *, *:before, *:after {
  	box-sizing: inherit;
 }
-#local-form, #searchShelters, .buttons, .restart, h3 {
+ #searchShelters {
+     text-align: left;
+ }
+#local-form {
     text-align: center;
+}
+#nav-shelter {
+    margin-bottom: 0;
 }
 .jumbotron {
      background: url('https://hd.unsplash.com/photo-1465778041461-5e0e5372ed8c');
@@ -20,7 +26,17 @@ html {
     color: #FFFFFF;
     margin-left: 1em;
 }
+#search-local, #enter-shelters {
+    margin-bottom: 2em;
+}
+#saveShelter {
+    cursor: pointer;
+}
 #home, #pets{
     vertical-align: middle;
     padding-right: 0.313em;
+}
+#footer-shelter {
+    margin: 4em;
+    text-align: center
 }

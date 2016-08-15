@@ -7,7 +7,6 @@ html {
 #search{
     text-align: center;
 }
-
 .jumbotron {
      background: url('https://hd.unsplash.com/photo-1469225208447-8329cbd3cb3a');
      background-size: cover;
@@ -21,29 +20,39 @@ html {
     color: #FFFFFF;
     margin-left: 1em;
 }
+.hidden {
+    display: none;
+}
+.img {
+    background-size: cover !important;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 9.375em;
+    height: 9.375em;
+}
+#nav{
+    margin-bottom: 0;
+}
+#searchBar, #searchLocation, #all-breeds, #submitButton {
+    margin-bottom: 2em;
+}
 #breedList {
+    margin-top: 2em;
     text-align: left;
+    overflow: scroll;
+    height: 12.5em;
 }
 #home, #place, #pets{
     vertical-align: middle;
     padding-right: 0.313em;
 }
-#search-results {
-    margin-left: 3%;
-    margin-top: 3%;
-}
-#saveBreed, #saveProfile {
+#saveBreed {
     vertical-align: middle;
 }
-#saveBreed:hover{
+#saveBreed:hover, .img:hover {
     cursor: pointer;
-    background: grey;
 }
-#saveProfile:hover{
-    cursor: pointer;
-    background: grey;
-}
-.restart {
-    margin-top: 2%;
-    margin-bottom: 2%;
+#footer-pets {
+    margin: 4em;
+    text-align: center
 }
