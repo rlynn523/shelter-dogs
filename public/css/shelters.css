@@ -7,11 +7,20 @@ html {
 #local-form, #searchShelters, .buttons, .restart, h3 {
     text-align: center;
 }
-
-.buttons {
-    margin-bottom: 1em;
+.jumbotron {
+     background: url('https://hd.unsplash.com/photo-1465778041461-5e0e5372ed8c');
+     background-size: cover;
+     background-repeat: no-repeat;
+     background-position: center;
+     height: 31.25em;
+     width: 100%;
+     background-position-y: 55%;
 }
-.restart {
-    margin-top: 2%;
-    margin-bottom: 2%;
+.title-container {
+    color: #FFFFFF;
+    margin-left: 1em;
+}
+#home, #pets{
+    vertical-align: middle;
+    padding-right: 0.313em;
 }
