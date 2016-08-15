@@ -1,0 +1,42 @@
+html {
+  	box-sizing: border-box;
+}
+*, *:before, *:after {
+ 	box-sizing: inherit;
+}
+ #searchShelters {
+     text-align: left;
+ }
+#local-form {
+    text-align: center;
+}
+#nav-shelter {
+    margin-bottom: 0;
+}
+.jumbotron {
+     background: url('https://hd.unsplash.com/photo-1465778041461-5e0e5372ed8c');
+     background-size: cover;
+     background-repeat: no-repeat;
+     background-position: center;
+     height: 31.25em;
+     width: 100%;
+     background-position-y: 55%;
+}
+.title-container {
+    color: #FFFFFF;
+    margin-left: 1em;
+}
+#search-local, #enter-shelters {
+    margin-bottom: 2em;
+}
+#saveShelter {
+    cursor: pointer;
+}
+#home, #pets{
+    vertical-align: middle;
+    padding-right: 0.313em;
+}
+#footer-shelter {
+    margin: 4em;
+    text-align: center
+}

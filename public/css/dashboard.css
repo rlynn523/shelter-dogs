@@ -1,0 +1,50 @@
+html {
+  	box-sizing: border-box;
+}
+*, *:before, *:after {
+ 	box-sizing: inherit;
+}
+#nav-dash {
+    margin-bottom: 0;
+}
+.jumbotron {
+     background: url('https://hd.unsplash.com/reserve/UzWklzFdRBSbkRKhEnvc_1-6128.jpg');
+     background-size: cover;
+     background-repeat: no-repeat;
+     background-position: center;
+     height: 31.25em;
+     width: 100%;
+     background-position-y: 25%;
+}
+.title-container {
+    color: #FFFFFF;
+    margin-left: 1em;
+}
+#deleteBreed:hover, #deleteProfile:hover, #deleteShelter:hover {
+    cursor: pointer;
+}
+
+#saved-info {
+    text-align: center;
+}
+.navbar-text {
+    text-align: center;
+}
+#savedBreeds, #savedProfiles, #savedShelters {
+    margin-top: 2em;
+}
+#pets, #home, #place, #deleteProfile {
+    vertical-align: middle;
+    padding-right: 0.313em;
+}
+.profile {
+    text-align: left;
+}
+#footer-dash {
+    margin: 4em;
+    text-align: center
+}
+
+#saved-one, #saved-two, #saved-three {
+    margin-bottom: 2em;
+}
