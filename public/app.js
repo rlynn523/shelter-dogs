@@ -1,5 +1,5 @@
 $(function() {
-    var petFind = 'http://api.petfinder.com/pet.find';
+    var petFind = 'https://api.petfinder.com/pet.find';
     var key = '?key=781bec9e50bf85caa863d233753cf237';
     var dog = '&animal=dog';
     var location = '&location=';
