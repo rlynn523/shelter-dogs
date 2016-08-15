@@ -74,7 +74,7 @@ $(function() {
         var breed = $(this).data('breed').replace(/\s+/g, '-');
         $(this).closest('.profile-info').add();
         $.ajax({
-            url: 'mongodb://ryanlynn:rango123@ds145325.mlab.com:45325/heroku_t722w71v/breeds',
+            url: 'https://mysterious-badlands-72714.herokuapp.com/breeds',
             type: 'post',
             dataType: 'json',
             data: JSON.stringify({
@@ -92,7 +92,7 @@ $(function() {
         var age = $(this).data('age');
         $(this).closest('.profile-info').add();
         $.ajax({
-            url: 'mongodb://ryanlynn:rango123@ds145325.mlab.com:45325/heroku_t722w71v/profiles',
+            url: 'https://mysterious-badlands-72714.herokuapp.com/profiles',
             type: 'post',
             dataType: 'json',
             data: JSON.stringify({
@@ -136,7 +136,7 @@ $(function() {
 
     // GET request for saved profiles in user database
     $.ajax({
-        url: 'mongodb://ryanlynn:rango123@ds145325.mlab.com:45325/heroku_t722w71v/profiles',
+        url: 'https://mysterious-badlands-72714.herokuapp.com/profiles',
         type: 'get',
         dataType: 'json',
         success: function(data) {
@@ -153,7 +153,7 @@ $(function() {
             $('#savedProfiles').on('click', '#deleteProfile', function() {
                 $(this).closest('.profile').remove();
                 $.ajax({
-                    url: 'mongodb://ryanlynn:rango123@ds145325.mlab.com:45325/heroku_t722w71v/profiles/' + $(this).siblings('a').attr('data-pk'),
+                    url: 'https://mysterious-badlands-72714.herokuapp.com/profiles/' + $(this).siblings('a').attr('data-pk'),
                     type: 'delete',
                 });
             });
@@ -171,7 +171,7 @@ $(function() {
         $('#savedBreeds').on('click', '#deleteBreed', function() {
             $(this).closest('.breed').remove();
             $.ajax({
-                url: 'mongodb://ryanlynn:rango123@ds145325.mlab.com:45325/heroku_t722w71v/breeds/' + $(this).siblings('a').attr('data-pk'),
+                url: 'https://mysterious-badlands-72714.herokuapp.com/breeds/' + $(this).siblings('a').attr('data-pk'),
                 type: 'delete',
             });
         });
@@ -202,7 +202,7 @@ $(function() {
         $('#savedShelters').on('click', '#deleteShelter', function() {
             $(this).closest('.shelter').remove();
             $.ajax({
-                url: 'mongodb://ryanlynn:rango123@ds145325.mlab.com:45325/heroku_t722w71v/shelters/' + $(this).siblings('a').attr('data-pk'),
+                url: 'https://mysterious-badlands-72714.herokuapp.com/shelters/' + $(this).siblings('a').attr('data-pk'),
                 type: 'delete',
             });
         });
@@ -250,7 +250,7 @@ $(function() {
         var email = $(this).data('email').replace(/\s+/g, '-');
         $(this).closest('.shelter-info').add();
         $.ajax({
-            url: 'mongodb://ryanlynn:rango123@ds145325.mlab.com:45325/heroku_t722w71v/shelters',
+            url: 'https://mysterious-badlands-72714.herokuapp.com/shelters',
             type: 'post',
             dataType: 'json',
             data: JSON.stringify({
@@ -264,7 +264,7 @@ $(function() {
 
     // GET request for saved breeds in user database
     $.ajax({
-        url: 'mongodb://ryanlynn:rango123@ds145325.mlab.com:45325/heroku_t722w71v/breeds',
+        url: 'https://mysterious-badlands-72714.herokuapp.com/breeds',
         type: 'get',
         dataType: 'json',
         success: function(data) {
@@ -275,7 +275,7 @@ $(function() {
 
     // GET request for saved shelters in the user database
     $.ajax({
-        url: 'mongodb://ryanlynn:rango123@ds145325.mlab.com:45325/heroku_t722w71v/shelters',
+        url: 'https://mysterious-badlands-72714.herokuapp.com/shelters',
         type: 'get',
         dataType: 'json',
         success: function(data) {
