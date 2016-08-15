@@ -21,7 +21,7 @@ $(function() {
     /* Retrieves entire list of dog breeds to accordion, user can then make a
     selection to search. */
     $.ajax({
-        url: 'http://api.petfinder.com/breed.list?key=781bec9e50bf85caa863d233753cf237&animal=dog&format=json&callback=?',
+        url: 'https://api.petfinder.com/breed.list?key=781bec9e50bf85caa863d233753cf237&animal=dog&format=json&callback=?',
         type: 'get',
         dataType: 'jsonp',
         contentType: 'application/json',
@@ -224,7 +224,7 @@ $(function() {
         e.preventDefault();
         var input = $('#search-local').val();
         $.ajax({
-            url: 'http://api.petfinder.com/shelter.find?key=781bec9e50bf85caa863d233753cf237&location=' + input + '&format=json',
+            url: 'https://api.petfinder.com/shelter.find?key=781bec9e50bf85caa863d233753cf237&location=' + input + '&format=json',
             type: 'get',
             dataType: 'jsonp',
             success: function(data) {
