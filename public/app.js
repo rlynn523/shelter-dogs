@@ -234,7 +234,7 @@ $(function() {
                         data.petfinder.shelters.shelter[i].state.$t + ' ' + data.petfinder.shelters.shelter[i].zip.$t);
                     var email = data.petfinder.shelters.shelter[i].email.$t;
                     $('#searchShelters').append('<div class="col-xs-12" style="height: 100px">' + '<p class = "shelter-info">' + name +
-                        '<br>' + address + '<br>' + email + ' <img src="images/check.png" id="saveShelter" data-name="' + name + '" data-address="' + address + '" data-email="' + email +
+                        '<br>' + address + '<br>' + '<a href="mailto:' + email + '">' +email+ '</a>'+ ' <img src="images/check.png" id="saveShelter" data-name="' + name + '" data-address="' + address + '" data-email="' + email +
                         '" style="width: 20px">' + '</p>' + '</div>');
                 }
             },
