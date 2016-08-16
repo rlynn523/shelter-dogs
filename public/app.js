@@ -124,12 +124,12 @@ $(function() {
             clone.find('.img').data('name', profiles[i].name.$t);
             clone.find('.img').data('breed', mixBreeds);
             clone.find('.img').data('age', profiles[i].age.$t);
-            clone.find('.img').data('description', profiles[i].description.$t.trunc(400));
+            clone.find('.img').data('description', profiles[i].description.$t.trunc(600));
             clone.find('.card-title').html(profiles[i].name.$t);
             clone.find('#breed').html(mixBreeds + ' <img src="images/check.png" id="saveBreed"' +
                 ' data-breed="' + mixBreeds + '" style="width: 20px">');
             clone.find('#age').html(profiles[i].age.$t);
-            clone.find('#description').html(profiles[i].description.$t.trunc(400));
+            clone.find('#description').html(profiles[i].description.$t.trunc(600));
             $('#search-results').append(clone);
         }
     }
@@ -138,7 +138,7 @@ $(function() {
     $.ajax({
         url: 'http://localhost:8080/profiles',
         type: 'get',
-        dataType: 'json',
+        dataType: 'jsonp',
         success: function(data) {
             for (i = 0; i < data.length; i++) {
                 var id = data[i]._id;
@@ -266,7 +266,7 @@ $(function() {
     $.ajax({
         url: 'http://localhost:8080/breeds',
         type: 'get',
-        dataType: 'json',
+        dataType: 'jsonp',
         success: function(data) {
             // displays saved breeds on Saved Breeds
             displaySavedBreeds(data);
@@ -277,7 +277,7 @@ $(function() {
     $.ajax({
         url: 'http://localhost:8080/shelters',
         type: 'get',
-        dataType: 'json',
+        dataType: 'jsonp',
         success: function(data) {
             // displays saved shelters on Saved Shelters
             displaySavedShelters(data);

@@ -42,7 +42,7 @@ html {
     overflow: scroll;
     height: 12.5em;
 }
-#home, #place, #pets{
+#home, #place, #pets {
     vertical-align: middle;
     padding-right: 0.313em;
 }
