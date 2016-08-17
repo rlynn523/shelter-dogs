@@ -4,7 +4,6 @@ html {
 *, *:before, *:after {
  	box-sizing: inherit;
 }
-
 .jumbotron {
      background: url('https://hd.unsplash.com/25/puppy-love.jpg');
      background-size: cover;
@@ -24,7 +23,6 @@ html {
     vertical-align: middle;
     padding-right: 0.313em;
 }
-
 #buttons, #footer {
     margin: 4em;
     text-align: center
