@@ -16,6 +16,18 @@ html {
      width: 100%;
      background-position-y: 45%;
 }
+.profileSave {
+    opacity: 0;
+    height: 9.375em;
+}
+.profileSave:hover {
+    opacity: 0.7;
+    background-color: white;
+    display: table-cell;
+    border-radius: 50%;
+    text-align: center;
+    vertical-align: middle;
+}
 .title-container {
     color: #FFFFFF;
     margin-left: 1em;
@@ -24,6 +36,7 @@ html {
     display: none;
 }
 .img {
+    display: table;
     background-size: cover !important;
     background-repeat: no-repeat;
     background-position: center;
