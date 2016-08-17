@@ -6,14 +6,19 @@ I created this application as a portfolio project for the Thinkful Web Developme
 
 #Use
 ##Landing Page
-This is the initial page that the user is connected to first. Users have the option of starting a search for pets, shelters, or visiting their dashboard to view saved search items.
-<br>
-<br>
 <img src='https://github.com/rlynn523/shelter-dogs/blob/master/public/images/landing-page-laptop.png?raw=true' width='500'>
 <img src=https://github.com/rlynn523/shelter-dogs/blob/master/public/images/landing-page-mobile.png?raw=true' height='400'>
 <br>
+This is the initial page that the user is connected to first. Users have the option of starting a search for pets, shelters, or visiting their dashboard to view saved search items.
+
 ##Search Pets
+<img src='https://github.com/rlynn523/shelter-dogs/blob/master/public/images/search-pets-laptop.png?raw=true' width='500'>
+<img src='https://github.com/rlynn523/shelter-dogs/blob/master/public/images/search-pets-mobile.png?raw=true' height='400'>
+
 This page allows users to start a search for dogs based on breed and location. The results are appened below, and display with an image of the pet, their name, breed, age, and a description. If the user likes a profile for a dog, they can hover over the picture of the pet, and will be asked if they would like to save the profile. Upon clicking the image, the profile is now saved to their dashboard. 
+<br>
+<img src='https://github.com/rlynn523/shelter-dogs/blob/master/public/images/save-profile.png?raw=true' width='500'>
+
 #Tech Used
 This app was built using JavaScript and jQuery. Data is supplied by the Petfinder API and users are able to store any saved profiles, breeds, etc. thanks to mongoDB and mLab. The front end design and web resposiveness was created using Bootstrap. Unit testing of endpoints was conducted using Mocha and Chai, and Travis CI was utilized for continuous integration. 
 
