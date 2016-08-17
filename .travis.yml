@@ -8,12 +8,10 @@ addons:
     - mongodb-3.2-precise
     packages:
     - mongodb-org-server
-before_script:
-- npm install grunt-cli -g
 deploy:
   provider: heroku
   api_key:
     secure: tpV+csIkMt/JRjwwc5jrUWr2oZWLsnSZ49RVyZ4GgDBEEf4eh8bgnHYQjGegjow+0bZ34Tf8DRlPk2gfhrARCpYg1fso4ErLFWyQO1DkJRoxV4gmW+Uid/RnONiaqjR/PnFCzQureVgBO/F5QMmhiHJaXL5X04muazCHISitPGMgG994T88yR06UI5+JxUgV6n3iWQg9fWlsEiAGvODPBkg8IK3fpUobcnzepC3DLMelWLQxUjRbTo0J+pXS9rha4CZAr0s5seowigiPyX5i8FaquHD715WV+LSwrIIEY8Oyt38/e39BfmbWdqDTPFBMTdNKPg60Lw/Yayx4p90tdGpZTtN7ZBwYkjEVnpChmOvwQxJlEQ+9mTfStwAjpj4QnhBUEsk5J4+4zeoVpUU/kgJSpX+5YDXKsaJf41Uvmbpmc6JWym43S7w1jDXqjtAZsASsbWz+kchtXv3oMaronnM1vpkmKtvRFZ/XuwxupCZ/FYgICJ9yop5PUD7iJfQbTVG88VI0xdU7zyejXcXQedC5bBsiH4qFttBNPNT4oBsdMLtj79mGTupYbEui2ndef96CjzBqPLiSJcXUOdADRGjA1aQ+jUdIykUNqmUVhweopyrCuJ2v9hw+IDlN8SIr2wC3cueaa3THY/OLgUVCRO+0XrFB5QWo/2ZCy28kmKY=
-  app: mysterious-badlands-72714    
+  app: mysterious-badlands-72714
   on:
     repo: rlynn523/shelter-dogs
