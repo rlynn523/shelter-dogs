@@ -9,7 +9,7 @@ var jsonParser = bodyParser.json();
 app.use(express.static('public'));
 app.use(bodyParser.json());
 mongoose.connect('mongodb://ryanlynn:rango123@ds145325.mlab.com:45325/heroku_t722w71v');
-// mongoose.connect('mongodb://localhost/shelter-dogs');
+
 
 var Breed = require('./models/breeds.js');
 var Shelter = require('./models/shelters.js');
