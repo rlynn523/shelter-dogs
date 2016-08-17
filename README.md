@@ -1,6 +1,7 @@
 # Shelter Dog Sleuth - Thinkful Node Capstone Project 
 [![Build Status](https://travis-ci.org/rlynn523/shelter-dogs.svg?branch=master)](https://travis-ci.org/rlynn523/shelter-dogs)
-
+#Link
+https://mysterious-badlands-72714.herokuapp.com/
 #Purpose
 I created this application as a portfolio project for the Thinkful Web Development Bootcamp. I strongly believe in animal rescue and every dog I have ever had has been a resuce. I wanted to create an app that simplified the search for a shelter dog and that also connected them to local shelters in their area.
 
@@ -37,9 +38,6 @@ This page displays any saved data from the user. The user can review saved dog p
 
 #Tech Used
 This app was built using JavaScript and jQuery. Data is supplied by the Petfinder API and users are able to store any saved profiles, breeds, etc. thanks to mongoDB and mLab. The front end design and web resposiveness was created using Bootstrap. X-editable was used for inline editing of text in the dashboard. Unit testing of endpoints was conducted using Mocha and Chai, and Travis CI was utilized for continuous integration. 
-
-#Link
-https://mysterious-badlands-72714.herokuapp.com/
 
 #What Does The Future Hold?
 This is just the first version of the app I have enivisoned. In the future I plan on adding the following updates:
