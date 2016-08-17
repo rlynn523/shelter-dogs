@@ -16,6 +16,12 @@ html {
      width: 100%;
      background-position-y: 45%;
 }
+.jumbotron h1 {
+    margin-left: 1em;
+}
+#searchFields {
+    margin-top: 9.875em;
+}
 .profileSave {
     opacity: 0;
     height: 9.375em;
@@ -43,7 +49,6 @@ html {
     width: 9.375em;
     height: 9.375em;
 }
-
 #nav {
     margin-bottom: 0;
 }
@@ -51,7 +56,7 @@ html {
     margin-bottom: 2em;
 }
 #breedList {
-    margin-top: 2em;
+    margin-top: 4.375em;
     text-align: left;
     overflow: scroll;
     height: 12.5em;

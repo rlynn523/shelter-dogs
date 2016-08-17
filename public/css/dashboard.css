@@ -16,6 +16,9 @@ html {
      width: 100%;
      background-position-y: 25%;
 }
+.jumbotron h1 {
+    margin-left: 1em;
+}
 .title-container {
     color: #FFFFFF;
     margin-left: 1em;

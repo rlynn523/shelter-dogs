@@ -39,26 +39,28 @@
         <div class='title-container'>
             <h1 class='title' style='display: none'>Search <br> Shelters</h1>
         </div>
+        <div class='container' id='shelterSearch'>
+            <div class='rows'>
+                <form id='local-form' action='/shelters' method='post'>
+                    <div class='col-md-10 col-sm-12 col-xs-12'>
+                        <input type='text' class='form-control' id='search-local' placeholder='Ex: pittsburgh,pa or 15213' aria-describedby='sizing-addon1'>
+                    </div>
+                    <div class='col-md-2 col-sm-12 col-xs-12' id='submitButton'>
+                        <input type='submit' class='btn btn-info' value='Submit' id='enter-shelters'>
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
     <div class='container'>
-        <div class='rows'>
-            <form id='local-form' action='/shelters' method='post'>
-                <div class='col-md-10 col-sm-12 col-xs-12'>
-                    <input type='text' class='form-control' id='search-local' placeholder='Ex: pittsburgh,pa or 15213' aria-describedby='sizing-addon1'>
-                </div>
-                <div class='col-md-2 col-sm-12 col-xs-12' id='submitButton'>
-                    <input type='submit' class='btn btn-info' value='Submit' id='enter-shelters'>
-                </div>
-            </form>
-    </div>
-    <div class='container-fluid'>
         <div class='row'>
             <div id='searchShelters'></div>
         </div>
     </div>
-    <div class='container-fluid' id='footer-shelter'>
+    <div class='container' id='footer-shelter'>
         <div class='row'>
-            <div class='col-md-12 col-sm-12 col-xs-12'><p>Powered by <a href='https://www.petfinder.com/'>Petfinder.com</a></p>
+            <div class='col-md-12 col-sm-12 col-xs-12'>
+                <p>Powered by <a href='https://www.petfinder.com/'>Petfinder.com</a></p>
             </div>
         </div>
     </div>

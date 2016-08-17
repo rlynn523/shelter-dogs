@@ -39,26 +39,27 @@
         <div class='title-container'>
             <h1 class='title' style='display: none'>Search <br> Pets</h1>
         </div>
-    </div>
-    <div class='container'>
-        <div class='rows'>
-            <form id='search'>
-                <div class='col-md-3 col-sm-12 col-xs-12'>
-                    <input type='text' class='form-control' id='searchBar' placeholder='Ex: Terrier' aria-describedby='sizing-addon1'>
-                </div>
-                <div class='col-md-3 col-sm-12 col-xs-12'>
-                    <input type='text' class='form-control' id='searchLocation' placeholder='Ex: pittsburgh,pa or 15213' aria-describedby='sizing-addon1'>
-                </div>
-                <div class='col-md-3 col-sm-12 col-xs-12' id='submitButton'>
-                    <input type='submit' class='btn btn-info' value='Submit'>
-                </div>
-                <div class='col-md-3 col-md-3 col-sm-12 col-xs-12' id='all-breeds'>
-                    <button type='button' class='btn btn-info' data-toggle='collapse' data-target='#breedList' aria-expanded='false' aria-controls='#breedList'><i class='material-icons' id='pets'>pets</i>Searchable Breeds</button>
-                    <div class='collapse' id='breedList'></div>
-                </div>
-            </form>
+        <div class='container' id='searchFields'>
+            <div class='rows'>
+                <form id='search'>
+                    <div class='col-md-3 col-sm-12 col-xs-12'>
+                        <input type='text' class='form-control' id='searchBar' placeholder='Ex: Terrier' aria-describedby='sizing-addon1'>
+                    </div>
+                    <div class='col-md-3 col-sm-12 col-xs-12'>
+                        <input type='text' class='form-control' id='searchLocation' placeholder='Ex: pittsburgh,pa or 15213' aria-describedby='sizing-addon1'>
+                    </div>
+                    <div class='col-md-3 col-sm-12 col-xs-12' id='submitButton'>
+                        <input type='submit' class='btn btn-info' value='Submit'>
+                    </div>
+                    <div class='col-md-3 col-md-3 col-sm-12 col-xs-12' id='all-breeds'>
+                        <button type='button' class='btn btn-info' data-toggle='collapse' data-target='#breedList' aria-expanded='false' aria-controls='#breedList'><i class='material-icons' id='pets'>pets</i>Searchable Breeds</button>
+                        <div class='collapse' id='breedList'></div>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
+
     <div class='hidden'>
         <div class='card col-md-6'>
             <div class='img img-circle' id='saveProfile'>
@@ -78,7 +79,7 @@
             </div>
         </div>
     </div>
-    <div class='container-fluid' id='footer-pets'>
+    <div class='container' id='footer-pets'>
         <div class='row'>
             <div class='col-md-12 col-sm-12 col-xs-12' <p>Powered by <a href='https://www.petfinder.com/'>Petfinder.com</a></p>
             </div>
