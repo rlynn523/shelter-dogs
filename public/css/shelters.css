@@ -13,6 +13,11 @@ html {
 #nav-shelter {
     margin-bottom: 0;
 }
+.shelter-info:hover {
+    border-style: solid;
+    border-color: #d3d3d3;
+    border-width: .25em;
+}
 .jumbotron {
      background: url('https://hd.unsplash.com/photo-1465778041461-5e0e5372ed8c');
      background-size: cover;
@@ -21,6 +26,9 @@ html {
      height: 31.25em;
      width: 100%;
      background-position-y: 55%;
+}
+#shelterSearch {
+    margin-top: 9.875em;
 }
 .title-container {
     color: #FFFFFF;
@@ -32,7 +40,7 @@ html {
 #saveShelter {
     cursor: pointer;
 }
-#home, #pets{
+#search, #pets, #home {
     vertical-align: middle;
     padding-right: 0.313em;
 }

@@ -4,7 +4,7 @@ html {
 *, *:before, *:after {
  	box-sizing: inherit;
 }
-#search{
+#search {
     text-align: center;
 }
 .jumbotron {
@@ -16,6 +16,24 @@ html {
      width: 100%;
      background-position-y: 45%;
 }
+.jumbotron h1 {
+    margin-left: 1em;
+}
+#searchFields {
+    margin-top: 9.875em;
+}
+.profileSave {
+    opacity: 0;
+    height: 9.375em;
+}
+.profileSave:hover {
+    opacity: 0.7;
+    background-color: white;
+    display: table-cell;
+    border-radius: 50%;
+    text-align: center;
+    vertical-align: middle;
+}
 .title-container {
     color: #FFFFFF;
     margin-left: 1em;
@@ -24,25 +42,26 @@ html {
     display: none;
 }
 .img {
+    display: table;
     background-size: cover !important;
     background-repeat: no-repeat;
     background-position: center;
     width: 9.375em;
     height: 9.375em;
 }
-#nav{
+#nav {
     margin-bottom: 0;
 }
 #searchBar, #searchLocation, #all-breeds, #submitButton {
     margin-bottom: 2em;
 }
 #breedList {
-    margin-top: 2em;
+    margin-top: 4.375em;
     text-align: left;
     overflow: scroll;
     height: 12.5em;
 }
-#home, #place, #pets{
+#home, #place, #pets {
     vertical-align: middle;
     padding-right: 0.313em;
 }

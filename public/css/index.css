@@ -13,12 +13,14 @@ html {
      height: 31.25em;
      width: 100%;
 }
-
+.jumbotron h1 {
+    margin-left: 1em;
+}
 .title-container {
     color: #FFFFFF;
     margin-left: 1em;
 }
-#pets, #home, #place {
+#pets, #search, #place {
     vertical-align: middle;
     padding-right: 0.313em;
 }

@@ -16,6 +16,9 @@ html {
      width: 100%;
      background-position-y: 25%;
 }
+.jumbotron h1 {
+    margin-left: 1em;
+}
 .title-container {
     color: #FFFFFF;
     margin-left: 1em;
@@ -33,7 +36,7 @@ html {
 #savedBreeds, #savedProfiles, #savedShelters {
     margin-top: 2em;
 }
-#pets, #home, #place, #deleteProfile {
+#pets, #home, #place, #search, #deleteProfile {
     vertical-align: middle;
     padding-right: 0.313em;
 }

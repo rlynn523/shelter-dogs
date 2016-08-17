@@ -1,5 +1,5 @@
 $(function() {
-    var petFind = 'https://api.petfinder.com/pet.find';
+    var petFind = 'http://api.petfinder.com/pet.find';
     var key = '?key=781bec9e50bf85caa863d233753cf237';
     var dog = '&animal=dog';
     var location = '&location=';
@@ -21,7 +21,7 @@ $(function() {
     /* Retrieves entire list of dog breeds to accordion, user can then make a
     selection to search. */
     $.ajax({
-        url: 'https://api.petfinder.com/breed.list?key=781bec9e50bf85caa863d233753cf237&animal=dog&format=json&callback=?',
+        url: 'http://api.petfinder.com/breed.list?key=781bec9e50bf85caa863d233753cf237&animal=dog&format=json&callback=?',
         type: 'get',
         dataType: 'jsonp',
         contentType: 'application/json',
@@ -62,8 +62,13 @@ $(function() {
                 type: 'get',
                 dataType: 'jsonp',
                 success: function(data) {
-                    displayDogProfiles(data.petfinder.pets.pet);
-                }
+                    console.log(data);
+                    if (data.petfinder.pets) {
+                        displayDogProfiles(data.petfinder.pets.pet);
+                    } else {
+                        $('#search-results').html('<p style="text-align:center; font-size: 32px">'+'No results found!'+ '</p>');
+                    }
+                },
             });
             cleanSearch();
         }
@@ -124,12 +129,12 @@ $(function() {
             clone.find('.img').data('name', profiles[i].name.$t);
             clone.find('.img').data('breed', mixBreeds);
             clone.find('.img').data('age', profiles[i].age.$t);
-            clone.find('.img').data('description', profiles[i].description.$t.trunc(400));
+            clone.find('.img').data('description', profiles[i].description.$t.trunc(600));
             clone.find('.card-title').html(profiles[i].name.$t);
             clone.find('#breed').html(mixBreeds + ' <img src="images/check.png" id="saveBreed"' +
                 ' data-breed="' + mixBreeds + '" style="width: 20px">');
             clone.find('#age').html(profiles[i].age.$t);
-            clone.find('#description').html(profiles[i].description.$t.trunc(400));
+            clone.find('#description').html(profiles[i].description.$t.trunc(600));
             $('#search-results').append(clone);
         }
     }
@@ -195,7 +200,7 @@ $(function() {
             var email = data[i].email.replace(/-/g, " ");
             $('#savedShelters').append('<p class="shelter">' +
                 '<a href="#" class="savedShelters" data-type="text" data-pk=' + id +
-                ' data-url="/shelters">' + name + '<br>' + address + '<br>' + email + '</a>' +
+                ' data-url="/shelters">' + name + '<br>' + address + '<br>' + '<a href="mailto:' + email + '">' + email + '</a>' + '</a>' +
                 '<img src="images/clear.png" id="deleteShelter" style="width: 25px">' + '</p>');
         }
         // Click to remove shelters from saved list in the dashboard
@@ -224,7 +229,7 @@ $(function() {
         e.preventDefault();
         var input = $('#search-local').val();
         $.ajax({
-            url: 'https://api.petfinder.com/shelter.find?key=781bec9e50bf85caa863d233753cf237&location=' + input + '&format=json',
+            url: 'http://api.petfinder.com/shelter.find?key=781bec9e50bf85caa863d233753cf237&location=' + input + '&format=json',
             type: 'get',
             dataType: 'jsonp',
             success: function(data) {
@@ -233,8 +238,8 @@ $(function() {
                     var address = (data.petfinder.shelters.shelter[i].city.$t + ', ' +
                         data.petfinder.shelters.shelter[i].state.$t + ' ' + data.petfinder.shelters.shelter[i].zip.$t);
                     var email = data.petfinder.shelters.shelter[i].email.$t;
-                    $('#searchShelters').append('<div class="col-xs-12" style="height: 100px">' + '<p class = "shelter-info">' + name +
-                        '<br>' + address + '<br>' + email + ' <img src="images/check.png" id="saveShelter" data-name="' + name + '" data-address="' + address + '" data-email="' + email +
+                    $('#searchShelters').append('<div class="col-md-4 col-sm-6 col-xs-12" style="height: 100px">' + '<p class = "shelter-info">' + name +
+                        '<br>' + address + '<br>' + '<a href="mailto:' + email + '">' + email + '</a>' + ' <img src="images/check.png" id="saveShelter" data-name="' + name + '" data-address="' + address + '" data-email="' + email +
                         '" style="width: 20px">' + '</p>' + '</div>');
                 }
             },
