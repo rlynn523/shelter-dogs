@@ -4,7 +4,7 @@ html {
 *, *:before, *:after {
  	box-sizing: inherit;
 }
-#search{
+#search {
     text-align: center;
 }
 .jumbotron {
@@ -30,7 +30,8 @@ html {
     width: 9.375em;
     height: 9.375em;
 }
-#nav{
+
+#nav {
     margin-bottom: 0;
 }
 #searchBar, #searchLocation, #all-breeds, #submitButton {

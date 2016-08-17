@@ -33,7 +33,7 @@ html {
 #savedBreeds, #savedProfiles, #savedShelters {
     margin-top: 2em;
 }
-#pets, #home, #place, #deleteProfile {
+#pets, #home, #place, #search, #deleteProfile {
     vertical-align: middle;
     padding-right: 0.313em;
 }

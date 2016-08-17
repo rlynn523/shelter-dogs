@@ -56,14 +56,15 @@ $(function() {
         var searchLocation = $('#searchLocation').val();
         if (searchBar === '' || searchLocation === '') {
             alert('Please Enter Search Parameters!');
-        } else {
+        }
+        else {
             $.ajax({
                 url: petFind + key + dog + location + searchLocation + format + searchInput,
                 type: 'get',
                 dataType: 'jsonp',
                 success: function(data) {
-                    displayDogProfiles(data.petfinder.pets.pet);
-                }
+                        displayDogProfiles(data.petfinder.pets.pet);
+                },
             });
             cleanSearch();
         }
@@ -186,7 +187,7 @@ $(function() {
         });
     }
 
-    // Function that displays saved shelters in the user database to the dashboard
+    // Function that displays saved 's in the user database to the dashboard
     function displaySavedShelters(data) {
         for (i = 0; i < data.length; i++) {
             var id = data[i]._id;
@@ -228,6 +229,7 @@ $(function() {
             type: 'get',
             dataType: 'jsonp',
             success: function(data) {
+                console.log(data);
                 for (i = 0; i < data.petfinder.shelters.shelter.length; i++) {
                     var name = data.petfinder.shelters.shelter[i].name.$t;
                     var address = (data.petfinder.shelters.shelter[i].city.$t + ', ' +
