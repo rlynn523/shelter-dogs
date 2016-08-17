@@ -5,11 +5,9 @@ var bodyParser = require('body-parser');
 var id = mongoose.Types.ObjectId();
 var jsonParser = bodyParser.json();
 
-
 app.use(express.static('public'));
 app.use(bodyParser.json());
 mongoose.connect('mongodb://ryanlynn:rango123@ds145325.mlab.com:45325/heroku_t722w71v');
-
 
 var Breed = require('./models/breeds.js');
 var Shelter = require('./models/shelters.js');
@@ -151,6 +149,7 @@ app.delete('/profiles/:id', function(req, res) {
             res.status(200).json(profile);
         });
 });
+
 app.listen(process.env.PORT || 8080);
 
 module.exports.app = app;

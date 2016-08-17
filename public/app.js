@@ -62,11 +62,10 @@ $(function() {
                 type: 'get',
                 dataType: 'jsonp',
                 success: function(data) {
-                    console.log(data);
                     if (data.petfinder.pets) {
                         displayDogProfiles(data.petfinder.pets.pet);
                     } else {
-                        $('#search-results').html('<p style="text-align:center; font-size: 32px">'+'No results found!'+ '</p>');
+                        $('#search-results').html('<p style="text-align:center; font-size: 32px">' + 'No results found!' + '</p>');
                     }
                 },
             });
@@ -150,7 +149,6 @@ $(function() {
                 var description = data[i].description.replace(/-/g, " ");
                 var name = data[i].name.replace(/-/g, " ");
                 var breed = data[i].breed.replace(/-/g, " ");
-
                 $('#savedProfiles').append('<p class="profile">' + '<a href="#" class="savedProfiles" data-type="text" data-pk=' + id + ' data-url="/profiles">' + '</a>' + '<strong>' + 'Name: ' + '</strong>' + name + '<br>' + '<strong>' + 'Breed: ' + '</strong>' +
                     breed + '<br>' + '<strong>' + 'Age: ' + '</strong>' + data[i].age + '<br>' + '<strong>' + 'Description: ' + '</strong>' + description + '<br>' + '<strong>' + 'Delete Profile: ' + '</strong>' + '<img src="images/clear.png" id="deleteProfile" style="width: 25px">' + '<br>' + '</p>');
             }

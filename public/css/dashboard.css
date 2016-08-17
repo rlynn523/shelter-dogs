@@ -26,7 +26,6 @@ html {
 #deleteBreed:hover, #deleteProfile:hover, #deleteShelter:hover {
     cursor: pointer;
 }
-
 #saved-info {
     text-align: center;
 }
@@ -47,7 +46,6 @@ html {
     margin: 4em;
     text-align: center
 }
-
 #saved-one, #saved-two, #saved-three {
     margin-bottom: 2em;
 }
