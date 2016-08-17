@@ -1,1 +1,0 @@
-{"version":3,"sources":["../src/app.js"],"names":[],"mappings":";;;;IAAM,G,GACF,eAAc;AAAA;;AACV,YAAQ,GAAR,CAAY,SAAZ;AACH,C;;AAEL,IAAI,QAAQ,IAAI,GAAJ,EAAZ","file":"app.js","sourcesContent":["class Dog {\n    constructor() {\n        console.log('new dog');\n    }\n}\nvar Rango = new Dog();\n"]}
