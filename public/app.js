@@ -258,7 +258,7 @@ $(function() {
         $('#savedShelters').on('click', '#deleteShelter', function() {
             $(this).closest('.shelter').remove();
             $.ajax({
-                url: 'http://localhost:8080/shelters/' + $(this).siblings('a').attr('data-pk'),
+                url: apiUrl + '/shelters/' + $(this).siblings('a').attr('data-pk'),
                 type: 'delete',
             });
         });
