@@ -92,7 +92,10 @@ $(function() {
     $('#search-results').on('click', '#saveProfile', function() {
         var name = $(this).data('name').replace(/\s+/g, '-');
         var breed = $(this).data('breed').replace(/\s+/g, '-');
-        var description = $(this).data('description').replace(/\s+/g, '-');
+        var shelter = $(this).data('shelter').replace(/\s+/g, '-');
+        if($(this).data('description')){
+            var description = $(this).data('description').replace(/\s+/g, '-');
+        }
         var age = $(this).data('age');
         $(this).closest('.profile-info').add();
         $.ajax({
@@ -103,7 +106,8 @@ $(function() {
                 name: name,
                 breed: breed,
                 age: age,
-                description: description
+                description: description,
+                shelter: shelter,
             }),
             contentType: 'application/json',
         });
@@ -114,43 +118,74 @@ $(function() {
         var searchInput = $('#searchBar').val();
         for (i = 0; i < profiles.length; i++) {
             let breeds = profiles[i].breeds.breed;
-            let mixBreeds = "";     
-            if (Array.isArray(breeds)) {        
-                for (let i = 0; i < breeds.length; i++) {          
-                    mixBreeds += breeds[i].$t + " ";        
-                }      
-            } else {        
-                mixBreeds = breeds.$t;      
+            let mixBreeds = "";
+            let shelterId = profiles[i].shelterId.$t;
+            if (Array.isArray(breeds)) {
+                for (let i = 0; i < breeds.length; i++) {
+                    mixBreeds += breeds[i].$t + " ";
+                }
+            } else {
+                mixBreeds = breeds.$t;
             }
-            var clone = $('.hidden .card').clone();
-            clone = $(clone);
-            clone.find('.img').css('background', 'url(' + profiles[i].media.photos.photo[i].$t + ') no-repeat');
-            clone.find('.img').data('name', profiles[i].name.$t);
-            clone.find('.img').data('breed', mixBreeds);
-            clone.find('.img').data('age', profiles[i].age.$t);
-            clone.find('.img').data('description', profiles[i].description.$t.trunc(600));
-            clone.find('.card-title').html(profiles[i].name.$t);
-            clone.find('#breed').html(mixBreeds + ' <img src="images/check.png" id="saveBreed"' +
-                ' data-breed="' + mixBreeds + '" style="width: 20px">');
-            clone.find('#age').html(profiles[i].age.$t);
-            clone.find('#description').html(profiles[i].description.$t.trunc(600));
-            $('#search-results').append(clone);
+            getShelters(shelterId, profiles[i], mixBreeds);
         }
     }
-
+    function getShelters(shelterId, profile, mixBreeds) {
+        $.ajax({
+            url: 'https://api.petfinder.com/shelter.get?key=781bec9e50bf85caa863d233753cf237&id='+shelterId+'&format=json',
+            type: 'get',
+            dataType: 'jsonp',
+            success: function(data) {
+                var shelterName = '';
+                var email = '';
+                if(data.petfinder.shelter) {
+                    shelterName = (data.petfinder.shelter.name.$t);
+                    email = (data.petfinder.shelter.email.$t);
+                }
+                var clone = $('.hidden .card').clone();
+                clone = $(clone);
+                if(profile.media.photos.photo[0].$t) {
+                    clone.find('.img').css('background', 'url(' + profile.media.photos.photo[0].$t + ') no-repeat');
+                } else {
+                    clone.find('.img').css('background', 'url("images/big-paw.png") no-repeat');
+                }
+                clone.find('.img').data('name', profile.name.$t);
+                clone.find('.img').data('breed', mixBreeds);
+                clone.find('.img').data('age', profile.age.$t);
+                if(shelterName) {
+                    clone.find('.img').data('shelter', shelterName);
+                }
+                if(profile.description.$t){
+                    clone.find('.img').data('description', profile.description.$t.trunc(600));
+                }
+                clone.find('.card-title').html('Name: ' + profile.name.$t);
+                clone.find('#breed').html('Breed: ' + mixBreeds + ' <img src="images/check.png" id="saveBreed"' +
+                    ' data-breed="' + mixBreeds + '" style="width: 20px">');
+                clone.find('#age').html('Age: ' + profile.age.$t);
+                if(shelterName) {
+                    clone.find('#shelter').html('Shelter: ' + shelterName + '<br>' + 'Email: ' + '<a href="mailto:' + email + '">' + email + '</a>');
+                }
+                if(profile.description.$t){
+                    clone.find('#description').html('Description: ' + profile.description.$t.trunc(600));
+                }
+                $('#search-results').append(clone);
+            }
+        });
+    }
     // GET request for saved profiles in user database
     $.ajax({
         url: 'https://mysterious-badlands-72714.herokuapp.com/profiles',
         type: 'get',
-        dataType: 'json',
+        dataType: 'jsonp',
         success: function(data) {
             for (i = 0; i < data.length; i++) {
                 var id = data[i]._id;
                 var description = data[i].description.replace(/-/g, " ");
                 var name = data[i].name.replace(/-/g, " ");
                 var breed = data[i].breed.replace(/-/g, " ");
+                var shelter = data[i].shelter.replace(/-/g, " ");
                 $('#savedProfiles').append('<p class="profile">' + '<a href="#" class="savedProfiles" data-type="text" data-pk=' + id + ' data-url="/profiles">' + '</a>' + '<strong>' + 'Name: ' + '</strong>' + name + '<br>' + '<strong>' + 'Breed: ' + '</strong>' +
-                    breed + '<br>' + '<strong>' + 'Age: ' + '</strong>' + data[i].age + '<br>' + '<strong>' + 'Description: ' + '</strong>' + description + '<br>' + '<strong>' + 'Delete Profile: ' + '</strong>' + '<img src="images/clear.png" id="deleteProfile" style="width: 25px">' + '<br>' + '</p>');
+                    breed + '<br>' + '<strong>' + 'Age: ' + '</strong>' + data[i].age + '<br>' + '<strong>' + 'Shelter: ' + '</strong>' + shelter + '<strong>' + 'Description: ' + '</strong>' + description + '<br>' + '<strong>' + 'Delete Profile: ' + '</strong>' + '<img src="images/clear.png" id="deleteProfile" style="width: 25px">' + '<br>' + '</p>');
             }
             // Removes saved profiles on Saved Dog Profiles in Dashboard
             $('#savedProfiles').on('click', '#deleteProfile', function() {
@@ -180,7 +215,7 @@ $(function() {
         });
         $('.savedBreeds').editable({
             ajaxOptions: {
-                dataType: 'json',
+                dataType: 'jsonp',
                 contentType: 'application/json',
             },
             params: function(params) {
@@ -211,7 +246,7 @@ $(function() {
         });
         $('.savedShelters').editable({
             ajaxOptions: {
-                dataType: 'json',
+                dataType: 'jsonp',
                 contentType: 'application/json',
             },
             params: function(params) {
@@ -269,7 +304,7 @@ $(function() {
     $.ajax({
         url: 'https://mysterious-badlands-72714.herokuapp.com/breeds',
         type: 'get',
-        dataType: 'json',
+        dataType: 'jsonp',
         success: function(data) {
             // displays saved breeds on Saved Breeds
             displaySavedBreeds(data);
@@ -280,7 +315,7 @@ $(function() {
     $.ajax({
         url: 'https://mysterious-badlands-72714.herokuapp.com/shelters',
         type: 'get',
-        dataType: 'json',
+        dataType: 'jsonp',
         success: function(data) {
             // displays saved shelters on Saved Shelters
             displaySavedShelters(data);
