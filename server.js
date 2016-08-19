@@ -8,6 +8,7 @@ var jsonParser = bodyParser.json();
 app.use(express.static('public'));
 app.use(bodyParser.json());
 mongoose.connect('mongodb://ryanlynn:rango123@ds145325.mlab.com:45325/heroku_t722w71v');
+// mongoose.connect('mongodb://localhost/shelter-dogs');
 
 var Breed = require('./models/breeds.js');
 var Shelter = require('./models/shelters.js');
@@ -127,6 +128,8 @@ app.post('/profiles', function(req, res) {
             name: req.body.name,
             breed: req.body.breed,
             age: req.body.age,
+            shelter: req.body.shelter,
+            email: req.body.email,
             description: req.body.description
         }, function(err, profile) {
             if (err) {

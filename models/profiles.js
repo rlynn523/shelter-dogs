@@ -6,6 +6,7 @@ var dogProfile = new Schema ({
     breed: String,
     age: String,
     shelter: String,
+    email: String,
     description: String
 });
 

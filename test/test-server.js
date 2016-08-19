@@ -66,6 +66,8 @@ describe('Testing Routes', function() {
                     name: 'rango',
                     breed: 'cattle dog',
                     age: 'young',
+                    shelter: 'pitt pups',
+                    email: 'rangorocks@gmail.com',
                     description: 'male',
                 }, function() {
                     done();
@@ -184,6 +186,8 @@ describe('Testing Routes', function() {
                 res.body[0].should.have.property('name');
                 res.body[0].should.have.property('breed');
                 res.body[0].should.have.property('age');
+                res.body[0].should.have.property('shelter');
+                res.body[0].should.have.property('email');
                 res.body[0].should.have.property('description');
                 res.body[0].name.should.be.a('string');
                 res.body[0].breed.should.be.a('string');
@@ -199,6 +203,8 @@ describe('Testing Routes', function() {
                 name: 'rango',
                 breed: 'cattle dog',
                 age: 'young',
+                shelter: 'pitt pups',
+                email: 'rangorocks@gmail.com',
                 description: 'male'
             })
             .end(function(err, res) {
@@ -208,10 +214,14 @@ describe('Testing Routes', function() {
                 res.body.name.should.equal('rango');
                 res.body.breed.should.equal('cattle dog');
                 res.body.age.should.equal('young');
+                res.body.shelter.should.equal('pitt pups');
+                res.body.email.should.equal('rangorocks@gmail.com');
                 res.body.description.should.equal('male');
                 res.body.name.should.be.a('string');
                 res.body.breed.should.be.a('string');
                 res.body.age.should.be.a('string');
+                res.body.shelter.should.be.a('string');
+                res.body.email.should.be.a('string');
                 res.body.description.should.be.a('string');
                 done();
             });
