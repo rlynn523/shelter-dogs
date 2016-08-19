@@ -166,7 +166,7 @@ $(function() {
                 if (profile.description.$t) {
                     clone.find('.img').data('description', profile.description.$t.trunc(600));
                 }
-                clone.find('.card-title').html('Name: ' + profile.name.$t);
+                clone.find('.card-title').html(profile.name.$t);
                 clone.find('#breed').html('Breed: ' + mixBreeds + ' <img src="images/check.png" id="saveBreed"' +
                     ' data-breed="' + mixBreeds + '" style="width: 20px">');
                 clone.find('#age').html('Age: ' + profile.age.$t);
@@ -191,7 +191,6 @@ $(function() {
         success: function(data) {
             for (i = 0; i < data.length; i++) {
                 var id = data[i]._id;
-                console.log(id);
                 var name = data[i].name.replace(/-/g, " ");
                 var breed = data[i].breed.replace(/-/g, " ");
                 var shelter = data[i].shelter.replace(/-/g, " ");
