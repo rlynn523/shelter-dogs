@@ -2,7 +2,7 @@
   "name": "shelter-dogs",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "server.js",
   "directories": {
     "test": "test"
   },
@@ -19,7 +19,7 @@
   },
   "scripts": {
     "test": "mocha",
-    "start": "node index.js"
+    "start": "node server.js"
   },
   "repository": {
     "type": "git",
