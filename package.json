@@ -19,7 +19,7 @@
   },
   "scripts": {
     "test": "mocha",
-    "start": "supervisor server.js"
+    "start": "node ."
   },
   "repository": {
     "type": "git",
