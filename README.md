@@ -2,7 +2,17 @@
 [![Build Status](https://travis-ci.org/rlynn523/shelter-dogs.svg?branch=master)](https://travis-ci.org/rlynn523/shelter-dogs)
 ##Link
 https://mysterious-badlands-72714.herokuapp.com/
-#Purpose
+
+##Table of Contents
+<li><a href='#purpose'>1. Purpose</a></li>
+<li><a href='#landing-page'>2. Landing Page</a></li>
+<li><a href='#search-pets'>3. Search Pets</a></li>
+<li><a href='#search-shelters'>4. Search Shelters</a></li>
+<li><a href='#doggie-dashboard'>5. Doggie Dashboard</a></li>
+<li><a href='#tech-used'>6. Tech Used</a></li>
+<li><a href='#what-does-the-future-hold'>7. What Does The Future Hold?</a></li>
+
+##Purpose
 I created this application as a portfolio project for the Thinkful Web Development Bootcamp. I strongly believe in animal rescue and every dog I have ever had has been a resuce. I wanted to create an app that simplified the search for a shelter dog and that also connected them to local shelters in their area.
 
 ##Use
