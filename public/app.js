@@ -25,19 +25,18 @@ $(function() {
         url: 'https://api.petfinder.com/breed.list?key=781bec9e50bf85caa863d233753cf237&animal=dog&format=json&callback=?',
         type: 'get',
         dataType: 'jsonp',
-        contentType: 'application/json',
-        success: function(data) {
-            for (i = 0; i < data.petfinder.breeds.breed.length; i++) {
-                $('#breedList').append('<p class=searchableBreed>' + data.petfinder.breeds.breed[i].$t +
-                    '<img src="images/check.png" id="searchBreed"' + ' data-breed="' + data.petfinder.breeds.breed[i].$t +
-                    '" style="width: 20px">' + '</p>');
-            }
-            // User can select a breed from the list and it will fill in the input field
-            $('#breedList').on('click', '#searchBreed', function() {
-                var breed = $(this).data('breed');
-                $('#searchBar').val(breed);
-            });
+        contentType: 'application/json'
+    }).done(function(data) {
+        for (i = 0; i < data.petfinder.breeds.breed.length; i++) {
+            $('#breedList').append('<p class=searchableBreed>' + data.petfinder.breeds.breed[i].$t +
+                '<img src="images/check.png" id="searchBreed"' + ' data-breed="' + data.petfinder.breeds.breed[i].$t +
+                '" style="width: 20px">' + '</p>');
         }
+        // User can select a breed from the list and it will fill in the input field
+        $('#breedList').on('click', '#searchBreed', function() {
+            var breed = $(this).data('breed');
+            $('#searchBar').val(breed);
+        });
     });
 
     // User presses enter to start search and results append below
@@ -61,14 +60,17 @@ $(function() {
             $.ajax({
                 url: petFind + key + dog + location + searchLocation + format + searchInput,
                 type: 'get',
-                dataType: 'jsonp',
-                success: function(data) {
-                    if (data.petfinder.pets) {
-                        displayDogProfiles(data.petfinder.pets.pet);
-                    } else {
-                        $('#search-results').html('<p style="text-align:center; font-size: 32px">' + 'No results found!' + '</p>');
-                    }
-                },
+                dataType: 'jsonp'
+            }).done(function(data) {
+                if (!($.isEmptyObject(data.petfinder.pets))) {
+                    displayDogProfiles(data.petfinder.pets.pet);
+                } else {
+                    var error = new Error('No results found!');
+                    $('#search-results').html('<p style="text-align:center; font-size: 32px">' + error + '</p>');
+                }
+            }).fail(function() {
+                var databaseError = new Error('Database is down! Come back later!');
+                $('#search-results').html('<p style="text-align:center; font-size: 32px">' + databaseError + '</p>');
             });
             cleanSearch();
         }
@@ -139,80 +141,78 @@ $(function() {
         $.ajax({
             url: 'https://api.petfinder.com/shelter.get?key=781bec9e50bf85caa863d233753cf237&id=' + shelterId + '&format=json',
             type: 'get',
-            dataType: 'jsonp',
-            success: function(data) {
-                var shelterName = '';
-                var email = '';
-                if (data.petfinder.shelter) {
-                    shelterName = (data.petfinder.shelter.name.$t);
-                    email = (data.petfinder.shelter.email.$t);
-                }
-                var clone = $('.hidden .card').clone();
-                clone = $(clone);
-                if (profile.media.photos.photo[0].$t) {
-                    clone.find('.img').css('background', 'url(' + profile.media.photos.photo[0].$t + ') no-repeat');
-                } else {
-                    clone.find('.img').css('background', 'url("images/big-paw.png") no-repeat');
-                }
-                clone.find('.img').data('name', profile.name.$t);
-                clone.find('.img').data('breed', mixBreeds);
-                clone.find('.img').data('age', profile.age.$t);
-                if (shelterName) {
-                    clone.find('.img').data('shelter', shelterName);
-                }
-                if (email) {
-                    clone.find('.img').data('email', email);
-                }
-                if (profile.description.$t) {
-                    clone.find('.img').data('description', profile.description.$t.trunc(600));
-                }
-                clone.find('.card-title').html(profile.name.$t);
-                clone.find('#breed').html('Breed: ' + mixBreeds + ' <img src="images/check.png" id="saveBreed"' +
-                    ' data-breed="' + mixBreeds + '" style="width: 20px">');
-                clone.find('#age').html('Age: ' + profile.age.$t);
-                if (shelterName) {
-                    clone.find('#shelter').html('Shelter: ' + shelterName);
-                }
-                if (email) {
-                    clone.find('#email').html('Email: ' + '<a href="mailto:' + email + '">' + email + '</a>');
-                }
-                if (profile.description.$t) {
-                    clone.find('#description').html('Description: ' + profile.description.$t.trunc(600));
-                }
-                $('#search-results').append(clone);
+            dataType: 'jsonp'
+        }).done(function(data) {
+            var shelterName = '';
+            var email = '';
+            if (data.petfinder.shelter) {
+                shelterName = (data.petfinder.shelter.name.$t);
+                email = (data.petfinder.shelter.email.$t);
             }
+            var clone = $('.hidden .card').clone();
+            clone = $(clone);
+            if (profile.media.photos.photo[0].$t) {
+                clone.find('.img').css('background', 'url(' + profile.media.photos.photo[0].$t + ') no-repeat');
+            } else {
+                clone.find('.img').css('background', 'url("images/big-paw.png") no-repeat');
+            }
+            clone.find('.img').data('name', profile.name.$t);
+            clone.find('.img').data('breed', mixBreeds);
+            clone.find('.img').data('age', profile.age.$t);
+            if (shelterName) {
+                clone.find('.img').data('shelter', shelterName);
+            }
+            if (email) {
+                clone.find('.img').data('email', email);
+            }
+            if (profile.description.$t) {
+                clone.find('.img').data('description', profile.description.$t.trunc(600));
+            }
+            clone.find('.card-title').html(profile.name.$t);
+            clone.find('#breed').html('Breed: ' + mixBreeds + ' <img src="images/check.png" id="saveBreed"' +
+                ' data-breed="' + mixBreeds + '" style="width: 20px">');
+            clone.find('#age').html('Age: ' + profile.age.$t);
+            if (shelterName) {
+                clone.find('#shelter').html('Shelter: ' + shelterName);
+            }
+            if (email) {
+                clone.find('#email').html('Email: ' + '<a href="mailto:' + email + '">' + email + '</a>');
+            }
+            if (profile.description.$t) {
+                clone.find('#description').html('Description: ' + profile.description.$t.trunc(600));
+            }
+            $('#search-results').append(clone);
         });
     }
     // GET request for saved profiles in user database
     $.ajax({
         url: apiUrl + '/profiles',
         type: 'get',
-        dataType: 'json',
-        success: function(data) {
-            for (i = 0; i < data.length; i++) {
-                var id = data[i]._id;
-                var name = data[i].name.replace(/-/g, " ");
-                var breed = data[i].breed.replace(/-/g, " ");
-                var shelter = data[i].shelter.replace(/-/g, " ");
-                var email = data[i].email.replace(/-/g, " ");
-                var description = '';
-                if (data[i].description) {
-                    description = data[i].description.replace(/-/g, " ");
-                }
-                $('#savedProfiles').append('<p class="profile">' + '<a href="#" class="savedProfiles" data-type="text" data-pk=' + id + ' data-url="/profiles">' + '</a>' + '<strong>' + 'Name: ' + '</strong>' + name + '<br>' + '<strong>' + 'Breed: ' + '</strong>' +
-                    breed + '<br>' + '<strong>' + 'Age: ' + '</strong>' + data[i].age + '<br>' + '<strong>' + 'Shelter: ' + '</strong>' +
-                    shelter + '<br>' + '<strong>' + 'Email: ' + '</strong>' + '<a href="mailto:' + email + '">' + email + '</a>' + '<br>' + '<strong>' + 'Description: ' +
-                    '</strong>' + description + '<br>' + '<strong>' + 'Delete Profile: ' + '</strong>' + '<img src="images/clear.png" id="deleteProfile" style="width: 25px">' + '<br>' + '</p>');
+        dataType: 'json'
+    }).done(function(data) {
+        for (i = 0; i < data.length; i++) {
+            var id = data[i]._id;
+            var name = data[i].name.replace(/-/g, " ");
+            var breed = data[i].breed.replace(/-/g, " ");
+            var shelter = data[i].shelter.replace(/-/g, " ");
+            var email = data[i].email.replace(/-/g, " ");
+            var description = '';
+            if (data[i].description) {
+                description = data[i].description.replace(/-/g, " ");
             }
-            // Removes saved profiles on Saved Dog Profiles in Dashboard
-            $('#savedProfiles').on('click', '#deleteProfile', function() {
-                $(this).closest('.profile').remove();
-                $.ajax({
-                    url: apiUrl + '/profiles/' + $(this).siblings('a').attr('data-pk'),
-                    type: 'delete',
-                });
-            });
+            $('#savedProfiles').append('<p class="profile">' + '<a href="#" class="savedProfiles" data-type="text" data-pk=' + id + ' data-url="/profiles">' + '</a>' + '<strong>' + 'Name: ' + '</strong>' + name + '<br>' + '<strong>' + 'Breed: ' + '</strong>' +
+                breed + '<br>' + '<strong>' + 'Age: ' + '</strong>' + data[i].age + '<br>' + '<strong>' + 'Shelter: ' + '</strong>' +
+                shelter + '<br>' + '<strong>' + 'Email: ' + '</strong>' + '<a href="mailto:' + email + '">' + email + '</a>' + '<br>' + '<strong>' + 'Description: ' +
+                '</strong>' + description + '<br>' + '<strong>' + 'Delete Profile: ' + '</strong>' + '<img src="images/clear.png" id="deleteProfile" style="width: 25px">' + '<br>' + '</p>');
         }
+        // Removes saved profiles on Saved Dog Profiles in Dashboard
+        $('#savedProfiles').on('click', '#deleteProfile', function() {
+            $(this).closest('.profile').remove();
+            $.ajax({
+                url: apiUrl + '/profiles/' + $(this).siblings('a').attr('data-pk'),
+                type: 'delete',
+            });
+        });
     });
 
     // Function that displays saved breeds in the user database to the dashboard
@@ -273,7 +273,9 @@ $(function() {
             url: 'https://api.petfinder.com/shelter.find?key=781bec9e50bf85caa863d233753cf237&location=' + input + '&format=json',
             type: 'get',
             dataType: 'jsonp',
-            success: function(data) {
+            contentType: 'application/json',
+        }).done(function(data) {
+            if (data.petfinder.shelters) {
                 for (i = 0; i < data.petfinder.shelters.shelter.length; i++) {
                     var name = data.petfinder.shelters.shelter[i].name.$t;
                     var address = (data.petfinder.shelters.shelter[i].city.$t + ', ' +
@@ -283,8 +285,10 @@ $(function() {
                         '<br>' + address + '<br>' + '<a href="mailto:' + email + '">' + email + '</a>' + ' <img src="images/check.png" id="saveShelter" data-name="' + name + '" data-address="' + address + '" data-email="' + email +
                         '" style="width: 20px">' + '</p>' + '</div>');
                 }
-            },
-            contentType: 'application/json',
+            } else {
+                var error = new Error('No results found!');
+                $('#searchShelters').html('<p style="text-align:center; font-size: 32px">' + error + '</p>');
+            }
         });
         cleanSearch();
         $('#search-local').val('');
@@ -313,20 +317,18 @@ $(function() {
         url: apiUrl + '/breeds',
         type: 'get',
         dataType: 'json',
-        success: function(data) {
-            // displays saved breeds on Saved Breeds
-            displaySavedBreeds(data);
-        },
+    }).done(function(data) {
+        // displays saved breeds on Saved Breeds
+        displaySavedBreeds(data);
     });
 
     // GET request for saved shelters in the user database
     $.ajax({
         url: apiUrl + '/shelters',
         type: 'get',
-        dataType: 'json',
-        success: function(data) {
-            // displays saved shelters on Saved Shelters
-            displaySavedShelters(data);
-        },
+        dataType: 'json'
+    }).done(function(data) {
+        // displays saved shelters on Saved Shelters
+        displaySavedShelters(data);
     });
 });
