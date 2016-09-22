@@ -44,8 +44,7 @@ app.post('/breeds', function(req, res) {
             });
     } else {
         Breed.create({
-            name: req.body.name,
-            user: req.user._id
+            name: req.body.name
         }, function(err, breed) {
             if (err) {
                 return res.status(500).json({
