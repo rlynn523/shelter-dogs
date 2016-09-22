@@ -4,11 +4,10 @@ var mongoose = require('mongoose');
 var bodyParser = require('body-parser');
 var id = mongoose.Types.ObjectId();
 var jsonParser = bodyParser.json();
-
+var config = require('./config.js');
 app.use(express.static('public'));
 app.use(bodyParser.json());
-mongoose.connect('mongodb://ryanlynn:rango123@ds145325.mlab.com:45325/heroku_t722w71v');
-// mongoose.connect('mongodb://localhost/shelter-dogs');
+mongoose.connect(config.DATABASE_URL);
 
 var Breed = require('./models/breeds.js');
 var Shelter = require('./models/shelters.js');
@@ -41,7 +40,8 @@ app.post('/breeds', function(req, res) {
             });
     } else {
         Breed.create({
-            name: req.body.name
+            name: req.body.name,
+            user: req.user._id
         }, function(err, breed) {
             if (err) {
                 return res.status(500);
