@@ -51,9 +51,9 @@ $(function() {
     // User pushes the submit button and results append below
     $('#search').submit(function(e) {
         e.preventDefault();
-        var searchBar = $('#searchBar').val();
-        var searchInput = '&breed=' + $('#searchBar').val();
-        var searchLocation = $('#searchLocation').val();
+        var searchBar = $('#searchBar').val().trim();
+        var searchInput = '&breed=' + $('#searchBar').val().trim();
+        var searchLocation = $('#searchLocation').val().trim();
         if (searchBar === '' || searchLocation === '') {
             alert('Please Enter Search Parameters!');
         } else {
@@ -121,7 +121,7 @@ $(function() {
 
     // Function that takes in data from Petfinder API and appends results below
     function displayDogProfiles(profiles) {
-        var searchInput = $('#searchBar').val();
+        var searchInput = $('#searchBar').val().trim();
         for (i = 0; i < profiles.length; i++) {
             let breeds = profiles[i].breeds.breed;
             let mixBreeds = "";
@@ -268,7 +268,7 @@ $(function() {
 
     $('#local-form').submit(function(e) {
         e.preventDefault();
-        var input = $('#search-local').val();
+        var input = $('#search-local').val().trim();
         $.ajax({
             url: 'https://api.petfinder.com/shelter.find?key=781bec9e50bf85caa863d233753cf237&location=' + input + '&format=json',
             type: 'get',
