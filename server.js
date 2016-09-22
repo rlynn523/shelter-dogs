@@ -16,7 +16,9 @@ var Profile = require('./models/profiles.js');
 app.get('/breeds', function(req, res) {
     Breed.find(function(err, breed) {
         if (err) {
-            return res.status(500);
+            return res.status(500).json({
+                message: 'Internal Server Error'
+            });
         }
         res.send(breed);
     });
@@ -34,7 +36,9 @@ app.post('/breeds', function(req, res) {
             },
             function(err, breed) {
                 if (err) {
-                    return res.status(500);
+                    return res.status(500).json({
+                        message: 'Internal Server Error'
+                    });
                 }
                 res.status(200).json(breed);
             });
@@ -44,7 +48,9 @@ app.post('/breeds', function(req, res) {
             user: req.user._id
         }, function(err, breed) {
             if (err) {
-                return res.status(500);
+                return res.status(500).json({
+                    message: 'Internal Server Error'
+                });
             }
             res.status(201).json(breed);
         });
@@ -66,7 +72,9 @@ app.delete('/breeds/:id', function(req, res) {
 app.get('/shelters', function(req, res) {
     Shelter.find(function(err, shelter) {
         if (err) {
-            return res.status(500);
+            return res.status(500).json({
+                message: 'Internal Server Error'
+            });
         }
         res.send(shelter);
     });
@@ -84,7 +92,9 @@ app.post('/shelters', function(req, res) {
             },
             function(err, shelter) {
                 if (err) {
-                    return res.status(500);
+                    return res.status(500).json({
+                        message: 'Internal Server Error'
+                    });
                 }
                 res.status(200).json(shelter);
             });
@@ -95,7 +105,9 @@ app.post('/shelters', function(req, res) {
             email: req.body.email
         }, function(err, shelter) {
             if (err) {
-                return res.status(500);
+                return res.status(500).json({
+                    message: 'Internal Server Error'
+                });
             }
             res.status(201).json(shelter);
         });
@@ -117,7 +129,9 @@ app.delete('/shelters/:id', function(req, res) {
 app.get('/profiles', function(req, res) {
     Profile.find(function(err, profile) {
         if (err) {
-            return res.status(500);
+            return res.status(500).json({
+                message: 'Internal Server Error'
+            });
         }
         res.send(profile);
     });
@@ -133,9 +147,15 @@ app.post('/profiles', function(req, res) {
             description: req.body.description
         }, function(err, profile) {
             if (err) {
-                return res.status(500);
+                return res.status(500).json({
+                    message: 'Internal Server Error'
+                });
             }
             res.status(201).json(profile);
+        });
+    } else {
+        return res.status(500).json({
+            message: 'Internal Server Error'
         });
     }
 });
