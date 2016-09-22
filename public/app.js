@@ -4,8 +4,13 @@ $(function() {
     var dog = '&animal=dog';
     var location = '&location=';
     var format = '&format=json';
-    var apiUrl = 'https://mysterious-badlands-72714.herokuapp.com';
-    // var apiUrl = 'http://localhost:8080';
+    var apiUrl;
+    if(window.location.hostname === 'localhost') {
+        apiUrl = 'http://localhost:8080';
+    } else {
+        apiUrl = 'https://mysterious-badlands-72714.herokuapp.com';
+    }
+    
     String.prototype.trunc = String.prototype.trunc ||
         function(n) {
             return (this.length > n) ? this.substr(0, n - 1) + '&hellip;' : this;
@@ -17,6 +22,31 @@ $(function() {
         $('#searchLocation').val('');
         $('#search-results').empty();
         $('#searchShelters').empty();
+    }
+
+    if($('#nav-dash').length>0) {
+        $.fn.editable.defaults.mode = "inline";
+        $('.title').show('drop', {
+                direction: 'up'
+            }, 2000);
+            $('#saved-info').show('drop', {
+                direction: 'up'
+            }, 2000);
+    } else if($('#navTitle').length>0) {
+        $('.title').show('drop', {
+            direction: 'up'
+        }, 2000);
+        $('#buttons').show('drop', {
+            direction: 'up'
+        }, 2000);
+    } else if($('#nav').length>0) {
+        $('.title').show('drop', {
+            direction: 'up'
+        }, 2000);
+    } else if($('#nav-shelter').length>0) {
+        $('.title').show('drop', {
+            direction: 'up'
+        }, 2000);
     }
 
     /* Retrieves entire list of dog breeds to accordion, user can then make a
