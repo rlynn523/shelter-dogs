@@ -293,7 +293,7 @@ $(function() {
         cleanSearch();
         $('#search-local').val('');
     });
-    // User can click the check image to save a shelter profile to the database
+    // User can click the checkmark image to save a shelter profile to the database
     $('#searchShelters').on('click', '#saveShelter', function() {
         var name = $(this).data('name').replace(/\s+/g, '-');
         var address = $(this).data('address').replace(/\s+/g, '-');
