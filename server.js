@@ -20,7 +20,7 @@ app.get('/breeds', function(req, res) {
                 message: 'Internal Server Error'
             });
         }
-        return res.send(breed);
+        return res.json(breed);
     });
 });
 app.post('/breeds', function(req, res) {
@@ -75,7 +75,7 @@ app.get('/shelters', function(req, res) {
                 message: 'Internal Server Error'
             });
         }
-        return res.send(shelter);
+        return res.json(shelter);
     });
 });
 app.post('/shelters', function(req, res) {
@@ -132,7 +132,7 @@ app.get('/profiles', function(req, res) {
                 message: 'Internal Server Error'
             });
         }
-        return res.send(profile);
+        return res.json(profile);
     });
 });
 app.post('/profiles', function(req, res) {
