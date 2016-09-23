@@ -20,7 +20,7 @@ app.get('/breeds', function(req, res) {
                 message: 'Internal Server Error'
             });
         }
-        res.send(breed);
+        return res.send(breed);
     });
 });
 app.post('/breeds', function(req, res) {
@@ -40,7 +40,7 @@ app.post('/breeds', function(req, res) {
                         message: 'Internal Server Error'
                     });
                 }
-                res.status(200).json(breed);
+                return res.status(200).json(breed);
             });
     } else {
         Breed.create({
@@ -51,7 +51,7 @@ app.post('/breeds', function(req, res) {
                     message: 'Internal Server Error'
                 });
             }
-            res.status(201).json(breed);
+            return res.status(201).json(breed);
         });
     }
 });
@@ -65,7 +65,7 @@ app.delete('/breeds/:id', function(req, res) {
                     message: 'Internal Server Error'
                 });
             }
-            res.status(200).json(breed);
+            return res.status(200).json(breed);
         });
 });
 app.get('/shelters', function(req, res) {
@@ -75,7 +75,7 @@ app.get('/shelters', function(req, res) {
                 message: 'Internal Server Error'
             });
         }
-        res.send(shelter);
+        return res.send(shelter);
     });
 });
 app.post('/shelters', function(req, res) {
@@ -95,7 +95,7 @@ app.post('/shelters', function(req, res) {
                         message: 'Internal Server Error'
                     });
                 }
-                res.status(200).json(shelter);
+                return res.status(200).json(shelter);
             });
     } else {
         Shelter.create({
@@ -108,7 +108,7 @@ app.post('/shelters', function(req, res) {
                     message: 'Internal Server Error'
                 });
             }
-            res.status(201).json(shelter);
+            return res.status(201).json(shelter);
         });
     }
 });
@@ -122,7 +122,7 @@ app.delete('/shelters/:id', function(req, res) {
                     message: 'Internal Server Error'
                 });
             }
-            res.status(200).json(shelter);
+            return res.status(200).json(shelter);
         });
 });
 app.get('/profiles', function(req, res) {
@@ -132,7 +132,7 @@ app.get('/profiles', function(req, res) {
                 message: 'Internal Server Error'
             });
         }
-        res.send(profile);
+        return res.send(profile);
     });
 });
 app.post('/profiles', function(req, res) {
@@ -150,7 +150,7 @@ app.post('/profiles', function(req, res) {
                     message: 'Internal Server Error'
                 });
             }
-            res.status(201).json(profile);
+            return res.status(201).json(profile);
         });
     } else {
         return res.status(500).json({
@@ -168,7 +168,7 @@ app.delete('/profiles/:id', function(req, res) {
                     message: 'Internal Server Error'
                 });
             }
-            res.status(200).json(profile);
+            return res.status(200).json(profile);
         });
 });
 
