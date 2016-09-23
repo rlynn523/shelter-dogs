@@ -52,14 +52,16 @@ html {
 #nav {
     margin-bottom: 0;
 }
-#searchBar, #searchLocation, #all-breeds, #submitButton {
+#searchLocation, #all-breeds, #submitButton {
     margin-bottom: 2em;
 }
 #breedList {
-    margin-top: 4.375em;
-    text-align: left;
+    margin-left: 1em;
     overflow: scroll;
-    height: 12.5em;
+    height: 15em;
+}
+#breedList .searchableBreed {
+    font-size: 1em;
 }
 #home, #place, #pets {
     vertical-align: middle;
@@ -74,4 +76,9 @@ html {
 #footer-pets {
     margin: 4em;
     text-align: center
+}
+@media only screen and (max-width: 990px) {
+    #searchLocation {
+        margin-top: 2em;
+    }
 }
