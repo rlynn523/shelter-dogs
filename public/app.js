@@ -182,10 +182,10 @@ $(function() {
             }
             var clone = $('.hidden .card').clone();
             clone = $(clone);
-            if (profile.media.photos.photo[0].$t) {
-                clone.find('.img').css('background', 'url(' + profile.media.photos.photo[0].$t + ') no-repeat');
-            } else {
+            if (!profile.media.photos) {
                 clone.find('.img').css('background', 'url("images/big-paw.png") no-repeat');
+            } else {
+                clone.find('.img').css('background', 'url(' + profile.media.photos.photo[2].$t + ') no-repeat');
             }
             clone.find('.img').data('name', profile.name.$t);
             clone.find('.img').data('breed', mixBreeds);
