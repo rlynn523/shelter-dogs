@@ -77,8 +77,16 @@ html {
     margin: 4em;
     text-align: center
 }
+#individualProfiles {
+    height: 35em;
+}
 @media only screen and (max-width: 990px) {
     #searchLocation {
         margin-top: 2em;
+    }
+}
+@media only screen and (max-width: 780px) {
+    #individualProfiles {
+        height: auto;
     }
 }

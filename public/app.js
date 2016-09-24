@@ -5,12 +5,13 @@ $(function() {
     var location = '&location=';
     var format = '&format=json';
     var apiUrl;
+
     if(window.location.hostname === 'localhost') {
         apiUrl = 'http://localhost:8080';
     } else {
         apiUrl = 'https://mysterious-badlands-72714.herokuapp.com';
     }
-    
+
     String.prototype.trunc = String.prototype.trunc ||
         function(n) {
             return (this.length > n) ? this.substr(0, n - 1) + '&hellip;' : this;
@@ -196,7 +197,7 @@ $(function() {
                 clone.find('.img').data('email', email);
             }
             if (profile.description.$t) {
-                clone.find('.img').data('description', profile.description.$t.trunc(600));
+                clone.find('.img').data('description', profile.description.$t.trunc(400));
             }
             clone.find('.card-title').html(profile.name.$t);
             clone.find('#breed').html('Breed: ' + mixBreeds + ' <img src="images/check.png" id="saveBreed"' +
@@ -209,7 +210,7 @@ $(function() {
                 clone.find('#email').html('Email: ' + '<a href="mailto:' + email + '">' + email + '</a>');
             }
             if (profile.description.$t) {
-                clone.find('#description').html('Description: ' + profile.description.$t.trunc(600));
+                clone.find('#description').html('Description: ' + profile.description.$t.trunc(400));
             }
             $('#search-results').append(clone);
         });
@@ -250,6 +251,7 @@ $(function() {
         for (i = 0; i < data.length; i++) {
             var breed = data[i].name.replace(/-/g, " ");
             var id = data[i]._id;
+            // pk(primary key) is set as the id of the object that will be edited using x-editable as per their documentation
             $('#savedBreeds').append('<p class="breed">' + '<a href="#" class="savedBreeds" data-type="text" data-pk=' + id + ' data-url="/breeds">' + breed + '</a>' + '<img src="images/clear.png" id="deleteBreed" style="width: 25px">' + '</p>');
         }
         // Click the 'X' image to remove breeds from saved list
