@@ -4,7 +4,8 @@ var Schema = mongoose.Schema;
 var dogShelters = new Schema ({
     name: String,
     address: String,
-    email: String
+    email: String,
+    userId: String
 });
 
 var Shelter = mongoose.model('Shelter', dogShelters);

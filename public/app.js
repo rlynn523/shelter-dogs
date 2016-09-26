@@ -21,9 +21,32 @@ $(function() {
     function cleanSearch() {
         $('#searchBar').val('');
         $('#searchLocation').val('');
+        $('#enterUser').val('');
+        $('#enterPassword').val('');
         $('#search-results').empty();
         $('#searchShelters').empty();
     }
+
+    $('#user-form').submit(function(e) {
+        e.preventDefault();
+        console.log($('#enterUser').val().trim());
+        var username = $('#enterUser').val().trim();
+        var password = $('#enterPassword').val().trim();
+        $.ajax({
+            url: apiUrl + '/users',
+            type: 'post',
+            dataType: 'jsonp',
+            headers: {
+                "Authorization": "Basic " + btoa(username + ":" + password)
+            },
+            data: JSON.stringify({
+                username: username,
+                password: password
+            }),
+            contentType: 'application/json',
+        });
+        cleanSearch();
+    });
 
     if($('#nav-dash').length>0) {
         $.fn.editable.defaults.mode = "inline";
