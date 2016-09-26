@@ -47,7 +47,7 @@ This page allows users to start a search for shelters based on location. A searc
 This page displays any saved data from the user. The user can review saved dog profiles, or delete them. The user is also able to delete or edit saved breeds. For example, if they save a mixed breed of "Labrador Retriever Pit Bull Terrier" but decide they just want to save "Labrador Retriever". They can click on the word and make the edit and the edit will be stored. Users are also able to edit and delete saved shelters.
 
 ##Tech Used
-This app was built using Node.js, JavaScript and jQuery. Data is supplied by the Petfinder API and users are able to store any saved profiles, breeds, etc. thanks to MongoDB, Mongoose, and mLab. The front end design and web resposiveness was created using Bootstrap. X-editable was used for inline editing of text in the dashboard. Unit testing of endpoints was conducted using Mocha and Chai, and Travis CI was utilized for continuous integration. 
+This app was built using Node.js, JavaScript, jQuery, HTML5, and CSS3. Data is supplied by the Petfinder API and users are able to store any saved profiles, breeds, etc. thanks to MongoDB, Mongoose, and mLab. The front end design and web resposiveness was created using Bootstrap. X-editable was used for inline editing of text in the dashboard. Unit testing of endpoints was conducted using Mocha and Chai, and Travis CI was utilized for continuous integration. 
 
 ##What Does The Future Hold?
 This is just the first version of the app I have enivisoned. In the future I plan on adding the following updates:
