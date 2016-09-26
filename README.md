@@ -13,7 +13,7 @@ https://mysterious-badlands-72714.herokuapp.com/
 <li><a href='#what-does-the-future-hold'>What Does The Future Hold?</a></li>
 
 ##Purpose
-I strongly believe in animal rescue and every dog I have ever had has been a resuce. I wanted to create an app that simplified the search for a shelter dog and that also connected them to local shelters in their area.
+I strongly believe in animal rescue and every dog I have ever had has been a resuce. I created an app that simplified the search for a shelter dog and that also connected them to local shelters in their area.
 
 ##Use
 ###Landing Page
