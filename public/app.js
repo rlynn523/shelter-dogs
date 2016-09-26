@@ -251,7 +251,8 @@ $(function() {
         for (i = 0; i < data.length; i++) {
             var breed = data[i].name.replace(/-/g, " ");
             var id = data[i]._id;
-            // pk(primary key) is set as the id of the object that will be edited using x-editable as per their documentation
+            /*  pk(primary key) is set as the id of the object that will be edited
+             using x-editable as per their documentation - https://vitalets.github.io/x-editable/docs.html */
             $('#savedBreeds').append('<p class="breed">' + '<a href="#" class="savedBreeds" data-type="text" data-pk=' + id + ' data-url="/breeds">' + breed + '</a>' + '<img src="images/clear.png" id="deleteBreed" style="width: 25px">' + '</p>');
         }
         // Click the 'X' image to remove breeds from saved list
