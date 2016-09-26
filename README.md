@@ -1,4 +1,4 @@
-# Shelter Dog Sleuth - Thinkful Node Capstone Project 
+# Shelter Dog Sleuth
 [![Build Status](https://travis-ci.org/rlynn523/shelter-dogs.svg?branch=master)](https://travis-ci.org/rlynn523/shelter-dogs)
 ##Link
 https://mysterious-badlands-72714.herokuapp.com/
