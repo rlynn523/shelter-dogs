@@ -27,7 +27,7 @@ This is the initial page that the user is connected to first. Users have the opt
 <img src='https://github.com/rlynn523/shelter-dogs/blob/master/public/images/search-pets-laptop.png?raw=true' width='500'>
 <img src='https://github.com/rlynn523/shelter-dogs/blob/master/public/images/search-pets-mobile.png?raw=true' height='400'>
 
-This page allows users to start a search for dogs based on breed and location. The results are appened below, and display with an image of the pet, their name, breed, age, and a description. If the user likes a profile for a dog, they can hover over the picture of the pet, and will be asked if they would like to save the profile. Upon clicking the image, the profile is now saved to their dashboard. 
+This page allows users to start a search for dogs based on breed and location. The results are appened below, and display with an image of the pet, their name, breed, age, and a description. If the user likes a profile for a dog, they can hover over the picture of the pet, and will be asked if they would like to save the profile. Upon clicking the image, the profile is now saved to their dashboard. Data is supplied by the Petfinder API
 <br>
 <br>
 <img src='https://github.com/rlynn523/shelter-dogs/blob/master/public/images/save-profile.png?raw=true' width='500'>
@@ -37,7 +37,7 @@ This page allows users to start a search for dogs based on breed and location. T
 <img src='https://github.com/rlynn523/shelter-dogs/blob/master/public/images/shelters-mobile.png?raw=true' height='400'>
 <br>
 <br>
-This page allows users to start a search for shelters based on location. A search returns a shelter's name, city/state/zip code, and a email address. The user can click the email address to start an email, as well as click the checkmark image to save the shelter to the dashboard. 
+This page allows users to start a search for shelters based on location. A search returns a shelter's name, city/state/zip code, and a email address. The user can click the email address to start an email, as well as click the checkmark image to save the shelter to the dashboard. Data is supplied by the Petfinder API.
 
 ###Doggie Dashboard
 <img src='https://github.com/rlynn523/shelter-dogs/blob/master/public/images/dashboard.png?raw=true' width='500'>
